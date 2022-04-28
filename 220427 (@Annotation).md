@@ -70,10 +70,12 @@
 
 25. **@RestController** : 매번 ResponseBody를 선언하지 않고 한 번에 적용 시
 
-26. **@RequestBody** : 사용자의 요청이 JSON인 경우 알아서 맞춰서 넣어달라.
+26. **@CrossOrigin("*")** : 허용하고 싶은 URL만 적음
+
+27. **@RequestBody** : 사용자의 요청이 JSON인 경우 알아서 맞춰서 넣어달라.
 
 Swagger
-27. **@EnableSwagger2**
+27. **@EnableSwagger2** : 스웨거 2버전 사용하겠다.
 27. **@Api**("어드민 컨트롤러 API V1")
 29. **@ApiOperation**(value="회원목록", notes="회원의 <big>전체목록</big>을 반환해 줍니다.")
 30. **@ApiResponses**({
@@ -82,7 +84,11 @@ Swagger
         @ApiResponse(code=500, message="서버에러")
     })
 
-**@ApiModel(**value = "MemberDto : 회원정보", description = "회원의 아이디, 이름, 비번, 가입일등을 설정")
-public class MemberDto {
-    **@ApiModelProperty**(value = "회원 아이디")
-    private String userid;
+31. **@ApiModel(**value = "MemberDto : 회원정보", description = "회원의 아이디, 이름, 비번, 가입일등을 설정")
+    public class MemberDto {
+        **@ApiModelProperty**(value = "회원 아이디")
+        private String userid;
+32. **@SpringBootApplication** : 하위 3개의 어노테이션 역할을 함
+33. **@SpringBootConfiguration** : 
+34. **@EnableAutoConfiguration**
+35. **@ComponentScan**
