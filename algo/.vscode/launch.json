@@ -1,0 +1,154 @@
+{
+  // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+  // 기존 특성에 대한 설명을 보려면 가리킵니다.
+  // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "show_me_the_code.Main",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution2",
+      "request": "launch",
+      "mainClass": "Solution2",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution3",
+      "request": "launch",
+      "mainClass": "Solution3",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "complete_search_by_number_of_digits.Main",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "dx_dy_technique.Main",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main_white_black",
+      "request": "launch",
+      "mainClass": "Main_white_black",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution",
+      "request": "launch",
+      "mainClass": "Solution",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution_1284",
+      "request": "launch",
+      "mainClass": "Solution_1284",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution_1859",
+      "request": "launch",
+      "mainClass": "Solution_1859",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution_1940",
+      "request": "launch",
+      "mainClass": "Solution_1940",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution_1954",
+      "request": "launch",
+      "mainClass": "Solution_1954",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution_1961",
+      "request": "launch",
+      "mainClass": "Solution_1961",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution_2001",
+      "request": "launch",
+      "mainClass": "Solution_2001",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Solution_2005",
+      "request": "launch",
+      "mainClass": "Solution_2005",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main(1)",
+      "request": "launch",
+      "mainClass": "boj.Main",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main_17298",
+      "request": "launch",
+      "mainClass": "boj.Main_17298",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main_17298_timeout",
+      "request": "launch",
+      "mainClass": "boj.Main_17298_timeout",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch Stack_Deque_toString_Test",
+      "request": "launch",
+      "mainClass": "boj.Stack_Deque_toString_Test",
+      "projectName": "algo_df4f941"
+    },
+    {
+      "type": "java",
+      "name": "Launch print52",
+      "request": "launch",
+      "mainClass": "print52",
+      "projectName": "algo_df4f941"
+    }
+  ]
+}
