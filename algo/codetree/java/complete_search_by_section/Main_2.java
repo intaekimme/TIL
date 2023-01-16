@@ -3,7 +3,13 @@ package complete_search_by_section;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+/**
+ * G to H 3
+ * 탐색 구간이 배열의 최대위치보다 긴 경우가 문제였다
+ * 문제 범위 잘 읽기
+ * 최적화보다는 문제 범위만큼 선언하는게 이롭다.
+ */
+public class Main_2 {
 
     static int[] px;
     static char[] alph;
