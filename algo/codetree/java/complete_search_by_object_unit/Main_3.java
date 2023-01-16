@@ -12,7 +12,7 @@ import java.util.*;
  * 하나 이상 있어야 한다.
  * 
  */
-public class Main {
+public class Main_3 {
     static int n;
     static int[] x, y;
 
