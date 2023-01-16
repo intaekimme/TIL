@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * 독서실의 거리두기 5
  */
-public class Main {
+public class Main_1 {
 
     static int n;
     static char[] origin, copy;
@@ -32,16 +32,9 @@ public class Main {
             int dist = Integer.MAX_VALUE;
             int cnt = 0;
             // 인원 배치 후 가장 가까운 두 사람 거리 계산
-            for (int j = 0; j < n; j++) {
-                if (copy[j] == '1') {
-                    for (int k = j + 1; k < n; k++) {
-                        if (copy[k] != '0')
-                            break;
-                        cnt++;
-                    }
-                }
-                dist = cnt < dist ? cnt : dist;
-            }
+
+            // todo
+            // 여기 어떻게 하는게 좋지..?
 
             max = max < dist ? dist : max;
         } // end of fori
