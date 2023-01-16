@@ -31,7 +31,7 @@ public class Main_3 {
         // n 이하의 수로 만들 수 있는 모든 쌍 (i, j)
         for (int i = 1; i <= n; i++) {
             for (int j = 1 + 1; j <= n; j++) {
-                max = Math.max(max, coutNum(i, j));
+                max = Math.max(max, countNum(i, j));
             }
         }
 
