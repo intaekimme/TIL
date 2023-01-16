@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * 가장 작은 x 찾기
  */
-public class Main {
+public class Main_2 {
 
     static int n;
     static int[] a, b;
