@@ -7,7 +7,7 @@ import java.lang.Math;
 /**
  * 한 가지로 열리는 자물쇠
  */
-public class Main {
+public class Main_1 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
