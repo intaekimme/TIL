@@ -9,7 +9,7 @@ import java.util.*;
 public class Main_3 {
 
     static int n, m;
-    static int[][] map;
+    static int[] a, b;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,22 +17,38 @@ public class Main_3 {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        map = new int[n + 1][n + 1];
+        a = new int[m];
+        b = new int[m];
+
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
-            int r = Integer.parseInt(st.nextToken());
-            int c = Integer.parseInt(st.nextToken());
-            map[r][c]++;
+            a[i] = Integer.parseInt(st.nextToken());
+            b[i] = Integer.parseInt(st.nextToken());
         }
 
         int max = Integer.MIN_VALUE;
+
+        // n 이하의 수로 만들 수 있는 모든 쌍 (i, j)
         for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                max = map[i][j] + map[j][i] > max ? map[i][j] + map[j][i] : max;
+            for (int j = 1 + 1; j <= n; j++) {
+                max = Math.max(max, coutNum(i, j));
             }
         }
 
         System.out.println(max);
     }// end of main
+
+    // (first, second) 쌍이 (a[i], b[i]) 혹은 (b[i], a[i])면
+    // 갯수 카운트
+    public static int countNum(int first, int second) {
+        int cnt = 0;
+        for (int i = 0; i < m; i++) {
+            if (a[i] == first && b[i] == second)
+                cnt++;
+            else if (a[i] == second && b[i] == first)
+                cnt++;
+        }
+        return cnt;
+    }
 
 }// end of class
