@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Main_1",
+      "request": "launch",
+      "mainClass": "complete_search_by_setting_a_new_standard.Main_1",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
       "name": "Launch Main",
       "request": "launch",
       "mainClass": "complete_search_by_setting_a_new_standard.Main",
