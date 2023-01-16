@@ -8,6 +8,13 @@
       "type": "java",
       "name": "Launch Main",
       "request": "launch",
+      "mainClass": "complete_search_by_section.Main",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
       "mainClass": "show_me_the_code.Main",
       "projectName": "algo_df4f941"
     },
