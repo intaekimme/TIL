@@ -8,7 +8,7 @@ import java.util.*;
  * 가장 가까운 두 점 사이의 거리에 제곱을 한 값을 구하라
  * = n개의 점에서 2점을 선택하는 모든 경우의 거리를 계산 후 최솟값을 구한다
  */
-public class Main {
+public class Main_2 {
     static int n;
     static int[] x, y;
 
