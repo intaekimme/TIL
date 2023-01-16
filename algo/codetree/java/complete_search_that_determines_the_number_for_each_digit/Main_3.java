@@ -5,7 +5,6 @@ import java.util.*;
 
 /**
  * 다이얼 한 조합을 고르고, 그 조합이 기존 조합과 거리가 2이내인지 확인
- * fail 코드
  */
 public class Main_3 {
     static int[] arr;
@@ -19,22 +18,30 @@ public class Main_3 {
         for (int i = 0; i < n; i++)
             arr[i] = i + 1;
 
-        int[] comb1 = new int[3];
-        int[] comb2 = new int[3];
-
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < 3; i++)
-            comb1[i] = Integer.parseInt(st.nextToken());
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < 3; i++)
-            comb1[2] = Integer.parseInt(st.nextToken());
+        int a2 = Integer.parseInt(st.nextToken());
+        int b2 = Integer.parseInt(st.nextToken());
+        int c2 = Integer.parseInt(st.nextToken());
 
         int ans = 0;
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
                 for (int k = 1; k <= n; k++) {
-                    if ((i != j && j != k && k != i) && (check(i, j, k, comb1) || check(i, j, k, comb2)))
+                    // 모든 자리가 주어진 첫 조합과의 거리가 2 이내인지 확인합니다.
+                    if ((Math.abs(a - i) <= 2 || Math.abs(a - i) >= n - 2)
+                            && (Math.abs(b - j) <= 2 || Math.abs(b - j) >= n - 2) &&
+                            (Math.abs(c - k) <= 2 || Math.abs(c - k) >= n - 2))
+                        ans++;
+
+                    // 모든 자리가 주어진 두번째 조합과의 거리가 2 이내인지 확인합니다.
+                    else if ((Math.abs(a2 - i) <= 2 || Math.abs(a2 - i) >= n - 2)
+                            && (Math.abs(b2 - j) <= 2 || Math.abs(b2 - j) >= n - 2) &&
+                            (Math.abs(c2 - k) <= 2 || Math.abs(c2 - k) >= n - 2))
                         ans++;
                 }
             }
@@ -43,24 +50,5 @@ public class Main_3 {
         System.out.println(ans);
 
     }// end of main
-
-    // 주어진 자리가 기존 조합과 거리가 2이내에 존재하는지 확인
-    public static boolean check(int i, int j, int k, int[] comb) {
-        for (int s = 0; s < n; s++) { // 기준 원소
-            for (int t = s - 2; t <= s + 2; t++) { // 원소로부터 좌우 거리 2
-                if (t < 0) { // 인덱스 음수 처리
-                    // 조합을 기록하고 왜 숫자를 다시 입력받고(comb와 i,j,k)
-                    // 그러면서 왜 개별적인 범위에서 체크를 하지?
-                    // 문제 이해 못함
-                    if (comb[i] == arr[n + t] || comb[j] == arr[n + t] || comb[k] == arr[n + t])
-                        return true;
-                } else { // 인덱스 양수인 경우
-                    if (comb[i] == arr[t] || comb[j] == arr[t] || comb[k] == arr[t])
-                        return true;
-                }
-            }
-        }
-        return false;
-    }// end of check1
 
 }// end of class
