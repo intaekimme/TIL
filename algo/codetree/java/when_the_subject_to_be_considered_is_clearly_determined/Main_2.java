@@ -3,6 +3,9 @@ package when_the_subject_to_be_considered_is_clearly_determined;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 두 점으로 만드는 직사각형
+ */
 public class Main_2 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
