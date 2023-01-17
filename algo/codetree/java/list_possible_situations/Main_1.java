@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * 순위 경쟁 2
  */
-public class Main {
+public class Main_1 {
 
     static int n;
 
@@ -16,7 +16,7 @@ public class Main {
         n = Integer.parseInt(br.readLine());
         StringTokenizer st;
 
-        char state = 'E'; // 명예의 전당 상태
+        char state = 'E'; // 명예의 전당 상태, 동점;E, A 1등; A, B 1등; B
         int[] score = new int[2]; // A, B의 점수 상태
         int cnt = 0; // 변경 횟수
 
