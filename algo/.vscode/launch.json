@@ -8,6 +8,20 @@
       "type": "java",
       "name": "Launch Main",
       "request": "launch",
+      "mainClass": "Intermediate_low.simulation.Main",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main_2",
+      "request": "launch",
+      "mainClass": "Novice_mid.exhaustive_search_3.exhaustive_exploration_by_assuming_the_situation_one_by_one.Main_2",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
       "mainClass": "when_the_subject_to_be_considered_is_clearly_determined.Main",
       "projectName": "algo_e6ea3953"
     },
