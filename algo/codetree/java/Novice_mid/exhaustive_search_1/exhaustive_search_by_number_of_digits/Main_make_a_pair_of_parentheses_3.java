@@ -1,4 +1,4 @@
-package complete_search_by_number_of_digits;
+package Novice_mid.exhaustive_search_1.exhaustive_search_by_number_of_digits;
 
 import java.io.*;
 

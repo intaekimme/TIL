@@ -1,4 +1,4 @@
-package complete_search_that_determines_the_number_for_each_digit;
+package Novice_mid.exhaustive_search_1.exhaustive_search_that_determines_the_number_for_each_digit;
 
 import java.io.*;
 import java.util.*;

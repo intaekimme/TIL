@@ -1,4 +1,4 @@
-package complete_search_by_section;
+package Novice_mid.exhaustive_search_1.exhaustive_search_by_section;
 
 import java.io.*;
 import java.util.*;

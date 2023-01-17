@@ -1,4 +1,4 @@
-package complete_search_by_setting_a_new_standard;
+package Novice_mid.exhaustive_search_3.exhaustive_search_by_setting_a_new_standard;
 
 import java.io.*;
 

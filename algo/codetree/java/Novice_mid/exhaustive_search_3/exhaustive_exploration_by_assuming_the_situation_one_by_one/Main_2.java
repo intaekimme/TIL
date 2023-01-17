@@ -1,4 +1,4 @@
-package complete_exploration_by_assuming_the_situation_one_by_one;
+package Novice_mid.exhaustive_search_3.exhaustive_exploration_by_assuming_the_situation_one_by_one;
 
 import java.io.*;
 import java.util.*;

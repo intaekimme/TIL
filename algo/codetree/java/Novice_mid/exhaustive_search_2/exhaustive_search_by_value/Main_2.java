@@ -1,4 +1,4 @@
-package complete_search_by_value;
+package Novice_mid.exhaustive_search_2.exhaustive_search_by_value;
 
 import java.io.*;
 import java.util.*;
