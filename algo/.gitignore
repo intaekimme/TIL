@@ -8,3 +8,6 @@
 .history/
 
 *.vsix
+
+input.txt
+output.txt
