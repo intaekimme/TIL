@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * 최고의 33위치
  */
-public class Main {
+public class Main_1 {
 
     static int n;
     static int[][] map;
