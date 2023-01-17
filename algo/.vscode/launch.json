@@ -8,6 +8,13 @@
       "type": "java",
       "name": "Launch Main",
       "request": "launch",
+      "mainClass": "picking_out_a_good_strategy.Main",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
       "mainClass": "reasoning_about_what_happened.Main",
       "projectName": "algo_e6ea3953"
     },
