@@ -3,7 +3,7 @@ package overlapping_case;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Main_1 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -31,5 +31,15 @@ public class Main {
             return true;
         return false;
     }// end of check
+
+    // 두 선분이 겹치는지 확인하고 그 결과를 반환하는 함수2
+    // 겹치면 true, 안 겹치면 false
+    public static boolean check2(int x1, int x2, int x3, int x4) {
+        // 겹치지 않는 경우 먼저 처리
+        if (x2 < x3 || x4 < x1)
+            return false;
+        // 겹치는 경우
+        return true;
+    }
 
 }// end of class
