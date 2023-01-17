@@ -1,9 +1,8 @@
 package picking_out_a_good_strategy;
 
 import java.io.*;
-import java.util.*;
 
-public class Main {
+public class Main_3 {
     static int n;
     static char[] arr;
 
