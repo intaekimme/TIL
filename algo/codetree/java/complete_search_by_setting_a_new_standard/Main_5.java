@@ -26,7 +26,7 @@ public class Main_5 {
 
         int min = Integer.MAX_VALUE;
         for (int a = Math.max(arr[0], arr[n - 1]); a <= 100; a++) {
-            if (isPossible(a))
+            if (isPossible2(a))
                 min = a < min ? a : min;
         }
 
@@ -52,5 +52,21 @@ public class Main_5 {
 
         return true;
     } // end of isPossible
+
+    public static boolean isPossible2(int maxVal) {
+        // 마지막 index로 부터
+        // 숫자 limit을 넘지 않으면서
+        // 거리 k이내로 계속 이동이 가능한지를 판단
+        int lastIdx = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] <= maxVal) {
+                if (i - lastIdx > k)
+                    return false;
+                lastIdx = i;
+            }
+        }
+
+        return true;
+    }
 
 }// end of class
