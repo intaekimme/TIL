@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "list_possible_situations.Main",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
       "name": "Launch Main_2",
       "request": "launch",
       "mainClass": "picking_out_a_good_strategy.Main_2",
