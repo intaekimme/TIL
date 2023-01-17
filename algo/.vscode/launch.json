@@ -8,6 +8,13 @@
       "type": "java",
       "name": "Launch Main",
       "request": "launch",
+      "mainClass": "when_the_best_strategy_is_clearly_defined.Main",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
       "mainClass": "list_possible_situations.Main",
       "projectName": "algo_e6ea3953"
     },
