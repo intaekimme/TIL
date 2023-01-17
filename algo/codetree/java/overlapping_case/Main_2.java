@@ -3,7 +3,11 @@ package overlapping_case;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+/**
+ * 두 직사각형
+ */
+
+public class Main_2 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
