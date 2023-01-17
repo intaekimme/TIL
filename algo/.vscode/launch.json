@@ -8,6 +8,13 @@
       "type": "java",
       "name": "Launch Main",
       "request": "launch",
+      "mainClass": "Intermediate_low.simulation.shift.Main",
+      "projectName": "algo_e6ea3953"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
       "mainClass": "Intermediate_low.simulation.Main",
       "projectName": "algo_e6ea3953"
     },
