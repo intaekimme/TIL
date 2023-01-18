@@ -3,7 +3,7 @@ package Intermediate_low.simulation.multiple;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Main_1 {
     static final int MAX_N = 20;
 
     static int n, m, t;
