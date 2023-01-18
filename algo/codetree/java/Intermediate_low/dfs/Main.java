@@ -20,8 +20,7 @@ public class Main {
     static int cnt = 0;
 
     public static void dfs(int vertex) {
-        for (int i = 0; i < graph.get(vertex).size(); i++) {
-            int currV = graph.get(vertex).get(i);
+        for (Integer currV : graph.get(vertex)) {
             if (!visited[currV]) {
                 visited[currV] = true;
                 cnt++;
