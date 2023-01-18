@@ -57,9 +57,9 @@ public class Main_1 {
         currX = Integer.parseInt(st.nextToken());
         currY = Integer.parseInt(st.nextToken());
 
-        for (int i = 1; i <= MAX_N; i++) {
+        for (int i = 1; i <= n; i++) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j <= MAX_N; j++) {
+            for (int j = 1; j <= n; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
             }
         }
