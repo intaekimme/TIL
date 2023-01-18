@@ -10,7 +10,7 @@ import java.util.*;
  * 이므로 인접리스트가 효율적
  * 양방향 그래프
  */
-public class Main {
+public class Main_1 {
 
     static final int VERTICES_NUM = 1_000;
 
