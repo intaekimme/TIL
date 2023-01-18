@@ -3,7 +3,10 @@ package Intermediate_low.backtracking.permutation_of_size_n;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+/**
+ * 크기가 n인 순열
+ */
+public class Main_1 {
     static final int MAX_N = 8;
 
     static int n;
