@@ -3,6 +3,10 @@ package Intermediate_low.backtracking.choose_m_from_a_set_of_n_numbers;
 import java.io.*;
 import java.util.*;
 
+/**
+ * n개 중에 m개 뽑기
+ * 시간 복잡도 : O(C(N,M) * M)
+ */
 public class Main_1 {
 
     static int n, m;
