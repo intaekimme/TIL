@@ -20,9 +20,7 @@ public class Main_10 {
 
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (Math.abs(i - j) <= 1) // 거리가 1 이내면 덧셈 후 최댓값 비교과정 안함
-                    continue;
+            for (int j = i + 2; j < n; j++) {
                 max = Math.max(max, arr[i] + arr[j]);
             }
         }
