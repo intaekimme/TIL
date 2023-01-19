@@ -1,9 +1,13 @@
 package Novice_mid.exhaustive_search_1.exhaustive_search_by_number_of_digits;
 
 import java.io.*;
-import java.util.*;
 
-public class Main {
+/**
+ * 원 모양으로 되어있는 방
+ * 반시계 방향으로 방의 순번이 정해져 있고, 모든 사람도 반시계 방향으로 돈다.
+ * 
+ */
+public class Main_8 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -15,10 +19,10 @@ public class Main {
         }
 
         int min = Integer.MAX_VALUE;
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) { // 시작방 선택
             int sum = 0;
-            for (int j = 1; j <= n; j++) {
-                sum += i != j ? rooms[j] * Math.abs(j - i) : 0;
+            for (int j = 1; j <= n; j++) { // 거리합 구하기, 반시계 방향으로 돌기에 경우를 나눠줌
+                sum += j < i ? rooms[j] * Math.abs(n + j - i) : rooms[j] * Math.abs(j - i);
             }
             min = Math.min(min, sum);
         }
