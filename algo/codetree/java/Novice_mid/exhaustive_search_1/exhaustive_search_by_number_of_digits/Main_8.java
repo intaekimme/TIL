@@ -21,8 +21,8 @@ public class Main_8 {
         int min = Integer.MAX_VALUE;
         for (int i = 1; i <= n; i++) { // 시작방 선택
             int sum = 0;
-            for (int j = 1; j <= n; j++) { // 거리합 구하기, 반시계 방향으로 돌기에 경우를 나눠줌
-                sum += j < i ? rooms[j] * Math.abs(n + j - i) : rooms[j] * Math.abs(j - i);
+            for (int j = 1; j <= n; j++) { // 거리합 구하기, 반시계 방향으로 돌기에 경우를 나눠줌, 2항 항상 양수
+                sum += rooms[j] * ((n + j - i) % n);
             }
             min = Math.min(min, sum);
         }
