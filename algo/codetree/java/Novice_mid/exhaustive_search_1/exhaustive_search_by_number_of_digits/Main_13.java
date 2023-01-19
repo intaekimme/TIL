@@ -4,8 +4,9 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 오목 fail
- * check early return 으로 우상단 대각선만 확인 후 종료
+ * 오목
+ * 로직 구현 시 check에서 구현 잘못한 것 수정 +
+ * sol에서 inner loop만 탈출하던 것 outter loop까지 탈출하도록 종료
  */
 public class Main_13 {
 
@@ -21,25 +22,23 @@ public class Main_13 {
         int[] dx = new int[] { -1, 0, 1, 1 };
         int[] dy = new int[] { 1, 1, 1, 0 };
 
+        int[] stone_cnt = new int[3];
         for (int i = 0; i < 4; i++) {
-            int[] stone_cnt = new int[3];
+            stone_cnt = new int[3];
 
-            for (int j = 1; j <= 5; j++) {
+            for (int j = 0; j < 5; j++) {
                 int nx = x + dx[i] * j;
-                int ny = x + dy[i] * j; // y에다 더해야 하는데 x에 더함
+                int ny = y + dy[i] * j;
 
                 if (!inRange(nx, ny))
-                    return UNDECIDED;
+                    break;
                 stone_cnt[map[nx][ny]]++;
             }
 
-            //
-            if (stone_cnt[0] > 0)
-                return UNDECIDED;
             if (stone_cnt[1] == 5)
-                return new int[] { 1, x + 2, y + 2 };
+                return new int[] { 1, (x + dx[i] * 2) + 1, (y + dy[i] * 2) + 1 };
             if (stone_cnt[2] == 5)
-                return new int[] { 2, x + 2, y + 2 };
+                return new int[] { 2, (x + dx[i] * 2) + 1, (y + dy[i] * 2) + 1 };
         }
 
         return UNDECIDED;
@@ -47,11 +46,11 @@ public class Main_13 {
 
     public static int[] sol() {
         int[] res = new int[3];
-        for (int i = 0; i < MAX_N; i++) {
+        here: for (int i = 0; i < MAX_N; i++) {
             for (int j = 0; j < MAX_N; j++) {
                 res = check(i, j);
                 if (res[0] != 0)
-                    break;
+                    break here;
             }
         }
         return res;
