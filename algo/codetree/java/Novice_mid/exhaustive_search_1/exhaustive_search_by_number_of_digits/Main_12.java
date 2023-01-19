@@ -22,9 +22,15 @@ public class Main_12 {
     static int[] arr = new int[MAX_N];
     static int[] record = new int[3];
 
-    static StringBuilder sb = new StringBuilder();
-    static int[] index = new int[3];
-    static int debug_cnt = 0;
+    public static void init() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        n = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+    }// end of init
 
     public static int hasCarry() {
         int num1 = record[0];
@@ -49,29 +55,15 @@ public class Main_12 {
 
     public static void func(int cnt, int start) {
         if (cnt == 3) {
-            debug_cnt++;
-            for (int n : index)
-                sb.append(n).append(" ");
-
             int check_carry = hasCarry();
             if (check_carry == 0)
                 carry_cnt++;
-            else {
-                if (check_carry > max) {
-                    max = check_carry;
-                    sb.append(" | ");
-                    for (int n : record)
-                        sb.append(n).append(" ");
-                    sb.append(max);
-                }
-            }
-            sb.append("\n");
-            // max = Math.max(max, check_carry);
+            else
+                max = Math.max(max, check_carry);
             return;
         }
 
         for (int i = start; i < n; i++) {
-            index[cnt] = i;
             record[cnt] = arr[i];
             func(cnt + 1, i + 1);
         }
@@ -79,20 +71,12 @@ public class Main_12 {
     }// end of func
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        n = Integer.parseInt(br.readLine());
-
-        for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
-        }
+        init();
 
         int comb = (n * (n - 1) * (n - 2)) / (3 * 2 * 1); // 모든 쌍 갯수
 
         func(0, 0);
 
-        System.out.println(sb.toString());
-        System.out.println(comb + " " + debug_cnt);
         if (carry_cnt == comb)
             System.out.println(-1);
         else
