@@ -10,13 +10,9 @@ import java.util.*;
  * 바구니가 놓일 수 있는 범위 내에 존재하는 바구니가 구간 안에 존재하면 그냥 카운트
  */
 
-public class Main {
+public class Main_5 {
 
-    // 0 <= k <= 200
-    // 0 <= 바구니 위치 <= 100
-    // -200 <= 바구니 위치 - k <= -100
-    // 200 <= 바구니 위치 + k <= 300
-    static final int MAX_LEN = 500; // 0 <= n + k <= 500;
+    static final int MAX_LEN = 100;
 
     static int n, k;
     static int[] arr = new int[MAX_LEN + 1];
@@ -41,12 +37,11 @@ public class Main {
 
     public static void sol() {
 
-        for (int c = 0; c < MAX_LEN; c++) {
-            if (c - k < 0 || c + k >= MAX_LEN)
-                continue;
+        for (int c = 0; c <= MAX_LEN; c++) {
             int sum = 0;
             for (int x = c - k; x <= c + k; x++)
-                sum += arr[x];
+                if (0 <= x && x <= MAX_LEN)
+                    sum += arr[x];
             max = Math.max(max, sum);
         }
     }// end of sol
