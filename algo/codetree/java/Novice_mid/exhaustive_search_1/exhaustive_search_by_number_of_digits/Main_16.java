@@ -24,25 +24,26 @@ public class Main_16 {
 
     }// end of init
 
-    public static void func(int cnt, int start) {
-        if (cnt == n - 2) {
-            int sum = 0;
-            for (int val : record)
-                sum += val;
-            min = Math.min(min, Math.abs(s - sum));
-            return;
-        }
+    public static int getSum() {
+        int sum = 0;
+        for (int i = 0; i < n; i++)
+            sum += arr[i];
+        return sum;
+    }// end of getSum
 
-        for (int i = start; i < n; i++) {
-            record[cnt] = arr[i];
-            func(cnt + 1, i + 1);
+    public static void func() {
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int sum = getSum() - (arr[i] + arr[j]);
+                min = Math.min(min, Math.abs(s - sum));
+            }
         }
     }// end of sol
 
     public static void main(String[] args) throws IOException {
         init();
 
-        func(0, 0);
+        func();
 
         System.out.println(min);
     }// end of main
