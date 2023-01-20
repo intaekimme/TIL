@@ -3,7 +3,7 @@ package Novice_mid.exhaustive_search_1.exhaustive_search_by_number_of_digits;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Main_16 {
     static final int MAX_N = 100;
 
     static int n, s;
