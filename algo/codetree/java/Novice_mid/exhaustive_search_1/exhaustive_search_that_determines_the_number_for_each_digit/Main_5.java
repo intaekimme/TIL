@@ -42,6 +42,7 @@ public class Main_5 {
     }// end of updateMin
 
     public static void sol() {
+        int cnt = 0;
         for (int i = 0; i < 6; i++)
             for (int j = i + 1; j < 6; j++)
 
@@ -50,8 +51,10 @@ public class Main_5 {
                         if (k == i || k == j || l == i || l == j)
                             continue;
                         updateMin(i, j, k, l);
+                        cnt++;
                     }
 
+        System.out.println(cnt);
     }// end of sol
 
     public static void main(String[] args) throws IOException {
