@@ -7,12 +7,9 @@ public class Main_5 {
 
     static int[] arr;
     static boolean[] visited;
-    static int[] record = new int[3];
-    static int[] team = new int[2];
-
-    static int idx = 0;
-    static int team_cnt = 0;
-    static int cnt = 0;
+    static int[] team1_arr = new int[2];
+    static int[] team2_arr = new int[2];
+    static int[] team3_arr = new int[2];
 
     static int ans = Integer.MAX_VALUE;
 
@@ -27,43 +24,52 @@ public class Main_5 {
             arr[i] = Integer.parseInt(st.nextToken());
     }// end of init
 
+    public static int sum() {
+        int sum = 0;
+        for (int i = 0; i < 6; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
     public static void sol() {
-        func(0);
-    }// end of sol
+        for (int i = 0; i < 6; i++) {
+            if (!visited[i]) {
+                team1_arr[0] = arr[i];
+                visited[i] = true;
+                for (int j = 0; j < 6; j++) {
+                    if (!visited[j]) {
+                        team1_arr[1] = arr[j];
+                        visited[j] = true;
+                        for (int k = 0; k < 6; k++) {
+                            if (!visited[k]) {
+                                team2_arr[0] = arr[k];
+                                visited[k] = true;
+                                for (int l = 0; l < 6; l++) {
+                                    if (!visited[l]) {
+                                        team2_arr[1] = arr[l];
 
-    /**
-     * 조합 코드를 잘못짠 거 같음
-     */
-    public static void func(int start) {
-        if (cnt == 2) {
-            cnt = 0;
-            team_cnt++;
-            record[idx++] = team[0] + team[1];
+                                        int team1 = team1_arr[0] + team1_arr[1];
+                                        int team2 = team2_arr[0] + team2_arr[1];
+                                        int team3 = sum() - (team1 + team2);
 
-            System.out.print("(" + team[0] + ", " + team[1] + ") ");
+                                        int max = Math.max(team1, Math.max(team2, team3));
+                                        int min = Math.min(team1, Math.min(team2, team3));
 
-            if (team_cnt == 3) {
-                System.out.println();
-                int max = Integer.MIN_VALUE;
-                int min = Integer.MAX_VALUE;
-                for (int i = 0; i < 3; i++)
-                    max = Math.max(max, record[i]);
-                for (int i = 0; i < 3; i++)
-                    min = Math.min(min, record[i]);
-
-                ans = Math.min(ans, max - min);
-
-                idx = 0;
-                team_cnt = 0;
+                                        ans = Math.min(ans, max - min);
+                                    }
+                                } // end of l
+                                visited[k] = false;
+                            }
+                        } // end of k
+                        visited[j] = false;
+                    }
+                } // end of j
+                visited[i] = false;
             }
-            return;
-        }
+        } // end of i
 
-        for (int i = start; i < 6; i++) {
-            team[cnt++] = arr[i];
-            func(i + 1);
-        }
-    }// end of func
+    }// end of sol
 
     public static void main(String[] args) throws IOException {
         init();
