@@ -10,6 +10,7 @@ public class Main_1 {
 
     static int n, k;
     static ArrayList<Integer> arr = new ArrayList<>();
+    static int[] res;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,6 +18,8 @@ public class Main_1 {
 
         k = Integer.parseInt(st.nextToken());
         n = Integer.parseInt(st.nextToken());
+
+        res = new int[n];
 
         func(0, 0);
 
@@ -28,18 +31,24 @@ public class Main_1 {
             return;
         }
 
-        for (int i = 1; i <= k; i++) {
-            arr.add(start, i);
-            func(start + 1, cnt + 1);
-            arr.remove(arr.size() - 1);
-        }
+        // for (int i = 1; i <= k; i++) {
+        // arr.add(start, i);
+        // func(start + 1, cnt + 1);
+        // arr.remove(arr.size() - 1);
+        // }
 
+        for (int i = 1; i <= k; i++) {
+            res[start] = i;
+            func(start + 1, cnt + 1);
+        }
     }// end of func
 
     public static void print() {
-        for (int i = 0; i < arr.size(); i++) {
-            System.out.print(arr.get(i) + " ");
-        }
+        // for (int i = 0; i < arr.size(); i++) {
+        // System.out.print(arr.get(i) + " ");
+        // }
+        for (int i = 0; i < n; i++)
+            System.out.print(res[i] + " ");
         System.out.println();
     }
 
