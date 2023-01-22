@@ -9,60 +9,55 @@ import java.util.*;
  */
 public class Main_5 {
 
-    static int[] arr;
-    static int ans = Integer.MAX_VALUE;
-
-    public static void init() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        arr = new int[6];
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < 6; i++)
-            arr[i] = Integer.parseInt(st.nextToken());
-    }// end of init
-
-    public static int sum() {
-        int sum = 0;
-        for (int i = 0; i < 6; i++) {
-            sum += arr[i];
-        }
-        return sum;
-    }
-
-    public static void updateMin(int i, int j, int k, int l) {
-        int team1 = arr[i] + arr[j];
-        int team2 = arr[k] + arr[l];
-        int team3 = sum() - (team1 + team2);
-
-        int max = Math.max(team1, Math.max(team2, team3));
-        int min = Math.min(team1, Math.min(team2, team3));
-
-        ans = Math.min(ans, max - min);
-    }// end of updateMin
-
-    public static void sol() {
-        int cnt = 0;
-        for (int i = 0; i < 6; i++)
-            for (int j = i + 1; j < 6; j++)
-
-                for (int k = 0; k < 6; k++)
-                    for (int l = k + 1; l < 6; l++) {
-                        if (k == i || k == j || l == i || l == j)
-                            continue;
-                        updateMin(i, j, k, l);
-                        cnt++;
-                    }
-
-        System.out.println(cnt);
-    }// end of sol
+    public static int N;
+    public static int[] arr;
+    public static int[][] team = new int[3][2];
+    public static int[] visit = new int[6];
+    public static int result = Integer.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
-        init();
-        // double start = System.currentTimeMillis();
-        sol();
-        // double end = System.currentTimeMillis();
-        System.out.println(ans);
-        // System.out.println(ans + " " + (end - start));
-    }// end of main
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        arr = new int[6];
+
+        for (int i = 0; i < 6; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        backtracking(0, 1, 0);
+        System.out.println(result);
+    }
+
+    public static void backtracking(int depth, int count, int cnt) {
+        if (cnt == 2) {
+            cnt = 0;
+        }
+        if (depth == 2) {
+            count++;
+        }
+        if (depth == 4) {
+            int[] sum = new int[3];
+            for (int i = 0; i < 6; i++) {
+                if (visit[i] == 0)
+                    sum[0] += arr[i];
+                if (visit[i] == 1)
+                    sum[1] += arr[i];
+                if (visit[i] == 2)
+                    sum[2] += arr[i];
+            }
+            int max = Arrays.stream(sum).max().getAsInt();
+            int min = Arrays.stream(sum).min().getAsInt();
+            result = Math.min(result, Math.abs(max - min));
+            return;
+        }
+
+        for (int i = 0; i < 6; i++) {
+            if (visit[i] != 0)
+                continue;
+            visit[i] = count;
+            team[count][cnt] = arr[i];
+            backtracking(depth + 1, count, cnt + 1);
+            visit[i] = 0;
+        }
+    }
 }
