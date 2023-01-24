@@ -9,7 +9,7 @@ import java.util.*;
  * 같은 수 중복 허용
  * 
  */
-public class Main {
+public class Main_15656 {
 
     static final int MAX_N = 7;
 
