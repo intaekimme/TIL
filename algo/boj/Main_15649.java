@@ -12,26 +12,23 @@ public class Main_15649 {
     static final int MAX_N = 8;
 
     static int[] arr = new int[MAX_N];
-    static boolean[] visited = new boolean[MAX_N + 1];
     static int n, m;
     static StringBuilder sb = new StringBuilder();
 
-    public static void func(int cnt) {
-        if (cnt == m) {
+    public static void func(int depth) {
+        if (depth == m) {
             for (int i = 0; i < m; i++)
                 sb.append(arr[i]).append(" ");
             sb.append("\n");
             return;
         }
-
-        for (int i = 1; i <= n; i++) {
-            if (!visited[i]) {
-                arr[cnt] = i;
-                visited[i] = true;
-                func(cnt + 1);
-                visited[i] = false;
-            }
+        for (int i = arr[depth] + 1; i <= n; i++) {
+            // arr[depth] = i;
+            // func(depth + 1, i + 1);
+            arr[depth] = i;
+            func(depth + 1);
         }
+
     }// end of func
 
     public static void main(String[] args) throws IOException {
@@ -46,23 +43,3 @@ public class Main_15649 {
         System.out.print(sb.toString());
     }// end of main
 }// end of class
-
-/*
- * 4 2
- * 1 1
- * 1 2
- * 1 3
- * 1 4
- * 2 1
- * 2 2
- * 2 3
- * 2 4
- * 3 1
- * 3 2
- * 3 3
- * 3 4
- * 4 1
- * 4 2
- * 4 3
- * 4 4
- */
