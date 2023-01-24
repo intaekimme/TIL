@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * n과 m (5) 15654
  * 서로 다른 자연수, m개 수열
+ * 순열
  */
 public class Main_15654 {
 
@@ -57,3 +58,19 @@ public class Main_15654 {
         System.out.print(sb.toString());
     }// end of main
 }// end of class
+
+// 4 2
+// 9 8 7 1
+
+// 1 7
+// 1 8
+// 1 9
+// 7 1
+// 7 8
+// 7 9
+// 8 1
+// 8 7
+// 8 9
+// 9 1
+// 9 7
+// 9 8
