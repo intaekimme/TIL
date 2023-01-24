@@ -4,10 +4,11 @@ import java.io.*;
 import java.util.*;
 
 /**
- * n과 m (8) 15657
+ * n과 m (8) 15657, 15652
  * 서로 다른 자연수
  * 같은 수 여러번 가능
  * 오름차순
+ * 중복조합
  */
 public class Main_15657 {
     static final int MAX_N = 8;
@@ -51,3 +52,17 @@ public class Main_15657 {
         System.out.print(sb.toString());
     }// end of main
 }// end of class
+
+// 4 2
+// 9 8 7 1
+
+// 1 1
+// 1 7
+// 1 8
+// 1 9
+// 7 7
+// 7 8
+// 7 9
+// 8 8
+// 8 9
+// 9 9
