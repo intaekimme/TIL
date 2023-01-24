@@ -15,32 +15,56 @@ public class Main_4 {
     static boolean[] visited = new boolean[MAX_N + 1];
 
     static int ans = Integer.MIN_VALUE;
-    static int overlapCnt = Integer.MAX_VALUE;
 
-    public static void countOverlappingLine(int line_cnt) {
-        int[] line_records = new int[MAX_N + 1];
+    // static int overlapCnt = Integer.MIN_VALUE;
 
-        // 겹치는 선분 판별을 위해 뽑은 선분들 기록
-        for (int i = 0; i < line_cnt; i++) {
-            int line_num = record[i];
-            int x1 = lines[line_num][0];
-            int x2 = lines[line_num][1];
+    // 뽑은 선분이 겹치는지 확인하는 함수
+    // public static void countOverlappingLine(int line_cnt) {
+    // int[] line_records = new int[MAX_N + 1];
 
-            for (int x = x1; x <= x2; x++)
-                line_records[x]++;
-        }
+    // // 겹치는 선분 판별을 위해 뽑은 선분들 기록
+    // for (int i = 0; i < line_cnt; i++) {
+    // int line_num = record[i];
+    // int x1 = lines[line_num][0];
+    // int x2 = lines[line_num][1];
 
-        // 겹치는 선분의 갯수 카운트
-        int cnt = 0;
-        for (int i = 1; i <= MAX_N; i++)
-            if (line_records[i] > 1)
-                cnt = Math.max(cnt, line_records[i]);
+    // for (int x = x1; x <= x2; x++)
+    // line_records[x]++;
+    // }
 
-        overlapCnt = Math.min(overlapCnt, cnt);
+    // // 겹치지않는 선분의 갯수 카운트
+    // int cnt = 0;
+    // for (int i = 1; i <= MAX_N; i++)
+    // if (line_records[i] > 1)
+    // cnt = Math.max(cnt, line_records[i]);
 
-        ans = Math.max(ans, line_cnt - overlapCnt);
+    // overlapCnt = Math.max(overlapCnt, cnt);
 
-    }// end of countOverlappingLine
+    // ans = Math.min(ans, overlapCnt);
+
+    // }// end of countOverlappingLine
+
+    public static boolean overlapped(int num1, int num2) {
+        int[] line1 = lines[num1];
+        int[] line2 = lines[num2];
+
+        int ax1 = line1[0];
+        int ax2 = line1[1];
+
+        int bx1 = line2[0];
+        int bx2 = line2[1];
+
+        return !(ax2 < bx1 || bx2 < ax1); // 겹치지 않는 경우
+    }// end of overlapped
+
+    // 뽑은 선분 중 한 쌍이라도 겹치면 안됨
+    public static boolean possible(int line_cnt) {
+        for (int i = 0; i < line_cnt; i++)
+            for (int j = i + 1; j < line_cnt; j++)
+                if (overlapped(record[i], record[j]))
+                    return false;
+        return true;
+    }// end of possible
 
     /**
      * 
@@ -50,10 +74,10 @@ public class Main_4 {
      */
     public static void func(int line_cnt, int depth, int start) {
         if (depth == line_cnt) {
-            countOverlappingLine(line_cnt); // 뽑은 선분이 겹치는지 확인하는 함수
-            // for (int i : record)
-            // System.out.print(i + " ");
-            // System.out.println();
+            // countOverlappingLine(line_cnt);
+
+            if (possible(line_cnt))
+                ans = Math.max(ans, line_cnt);
             return;
         }
 
