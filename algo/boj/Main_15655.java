@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * n개의 서로 다른 자연수 15655
+ * n개의 서로 다른 자연수 15655, 15650
  * 수열 오름차순
  * 중복 x
  * 조합
@@ -53,3 +53,7 @@ public class Main_15655 {
         System.out.print(sb.toString());
     }// end of main
 }
+
+4 2 9 8 7 1
+
+1 7 1 8 1 9 7 8 7 9 8 9
