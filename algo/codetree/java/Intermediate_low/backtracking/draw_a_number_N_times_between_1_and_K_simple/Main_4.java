@@ -96,7 +96,7 @@ public class Main_4 {
     public static void sol() {
         // i : 뽑은 막대 갯수
         for (int i = 1; i <= n; i++)
-            func(i, 0, 1);
+            func(i, 0, 1); // 시간 초과 부분
     }// end of sol
 
     public static void init() throws IOException {
