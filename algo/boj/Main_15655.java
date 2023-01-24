@@ -9,7 +9,7 @@ import java.util.*;
  * 중복 x
  * 조합
  */
-public class Main {
+public class Main_15655 {
     static final int MAX_N = 8;
     static int n, m;
 
