@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * n과 m (5) 15654
+ * n과 m (5) 15654, 15649
  * 서로 다른 자연수, m개 수열
  * 순열
  */
