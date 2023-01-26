@@ -58,7 +58,7 @@ public class Main_9663 {
             boolean possible = true; // queen을 놓을 수 있는 여부
             // 고른 하나의 열에서 가능한 행 확인
             for (int i = 1; i <= row; i++) {
-                // 앞서 고른 행과 열(row, c)에 대해 새로 고른 행과 열(i, col[i])이 가능한지 판단
+                // 새로 고른 행과 열(row, c)이 기존에 고른 행과 열(i, col[i])에 대해 가능한지 판단
                 if (attackable(row, c, i, col[i])) {
                     possible = false;
                     break;
