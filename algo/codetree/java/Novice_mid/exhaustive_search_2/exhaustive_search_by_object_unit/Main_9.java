@@ -3,7 +3,10 @@ package Novice_mid.exhaustive_search_2.exhaustive_search_by_object_unit;
 import java.io.*;
 import java.util.*;
 
-public class Main {
+/**
+ * 선분 3개 지우기
+ */
+public class Main_9 {
 
     static int n;
     static int[][] lines;
