@@ -4,12 +4,16 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 개발자의 순위 fail
+ * 개발자의 순위
  */
 public class Main_6 {
 
     static int k, n;
     static int[][] arr;
+
+    static int[] nums;
+    static int[] selected = new int[2];
+
     static int ans = 0;
 
     public static void init() throws IOException {
@@ -27,33 +31,53 @@ public class Main_6 {
                 arr[i][j] = Integer.parseInt(st.nextToken());
             }
         }
+
+        nums = new int[n];
+        int val = n;
+        for (int i = 0; i < n; i++)
+            nums[i] = val--;
+
     }// end of init
 
-    public static void sol() {
-        // 한 줄 선택
+    public static boolean isAllwaysWin() {
+        int cnt = 0; // a번 개발자가 b번 개발자보다 더 높은 순위인 경우
+        // 각 경기별로
         for (int i = 0; i < k; i++) {
-
-            // 한 줄에서 나온 경우 선택
-            int a = 0;
-            int b = 0;
+            // a번 개발자
             for (int j = 0; j < n; j++) {
-                a = arr[i][j];
+                // b 번 개발자
                 for (int k = j + 1; k < n; k++) {
-                    if (a <= arr[i][k])
-                        continue;
-                    b = arr[i][k];
-
-                    for (int l = i + 1; l < k; l++) {
-                        for (int o = 0; o < n; o++) {
-                            for (int p = o + 1; p < n; p++) {
-                                if (a == arr[l][o] && b == arr[l][p])
-                                    ans++;
-                            }
-                        }
-                    }
+                    // 앞서 예상한 순위와 일치하면 카운트
+                    if (selected[0] == arr[i][j] && selected[1] == arr[i][k])
+                        cnt++;
                 }
             }
         }
+
+        // 모든 경기에서 순위가 높으면 true 리턴
+        if (cnt == k)
+            return true;
+        return false;
+    }// end of isAllwaysWin
+
+    // a, b 개발자의 가능한 경우 수, 순서 상관 있음
+    public static void func(int depth) {
+        if (depth == 2) {
+            // 모든 경기에서 항상 a번 개발자가 b번 개발자보다 더 높은 순위인가?
+            if (isAllwaysWin()) {
+                ans++;
+            }
+            return;
+        }
+
+        for (int i = 0; i < n; i++) {
+            selected[depth] = nums[i];
+            func(depth + 1);
+        }
+    }// end of func
+
+    public static void sol() {
+        func(0);
     }// end of sol
 
     public static void main(String[] args) throws IOException {
