@@ -3,6 +3,9 @@ package Novice_mid.exhaustive_search_2.exhaustive_search_by_object_unit;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 겹치지 않는 선분 2
+ */
 public class Main_4 {
 
     static final int MAX_N = 100;
