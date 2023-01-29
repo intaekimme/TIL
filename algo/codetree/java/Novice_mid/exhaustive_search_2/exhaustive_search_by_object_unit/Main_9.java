@@ -4,57 +4,54 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 선분 3개 지우기
+ * 선분 3개 지우기,
+ * 지울 3개의 직선 선택
  */
 public class Main_9 {
 
     static int n;
-    static int[][] lines;
-    static int[][] selected;
+    static int[] l, r;
     static int ans = 0;
-
-    public static boolean isOverRapped() {
-        for (int i = 1; i < n - 3; i++) {
-            if (selected[i - 1][1] >= selected[i][0])
-                return true;
-        }
-        return false;
-    }// end of isOverRapped
-
-    public static void func(int depth, int start) {
-        if (depth == n - 3) {
-            if (!isOverRapped()) {
-                ans++;
-            }
-
-            return;
-        }
-
-        for (int i = start; i < n; i++) {
-            selected[depth] = lines[i];
-            func(depth + 1, i + 1);
-        }
-
-    }// end of func
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         n = Integer.parseInt(br.readLine());
-        lines = new int[n][];
+        l = new int[n];
+        r = new int[n];
 
         StringTokenizer st;
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
 
-            lines[i] = new int[] { Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()) };
+            l[i] = Integer.parseInt(st.nextToken());
+            r[i] = Integer.parseInt(st.nextToken());
         }
 
-        Arrays.sort(lines, (a, b) -> a[0] - b[0]);
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                for (int k = j + 1; k < n; k++) {
 
-        selected = new int[n - 3][];
-        func(0, 0);
+                    boolean overlap = false;
+                    int[] arr = new int[101];
 
+                    // n개의 직선 표시
+                    for (int x = 0; x < n; x++) {
+                        if (x == i || x == j || x == k)
+                            continue;
+                        for (int y = l[x]; y <= r[x]; y++)
+                            arr[y]++;
+                    }
+
+                    for (int x = 1; x <= 100; x++)
+                        if (arr[x] > 1)
+                            overlap = true;
+
+                    if (overlap == false)
+                        ans++;
+                }
+            }
+        }
         System.out.println(ans);
 
     }// end of main
