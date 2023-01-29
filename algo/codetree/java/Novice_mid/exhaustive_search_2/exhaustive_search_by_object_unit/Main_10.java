@@ -3,6 +3,9 @@ package Novice_mid.exhaustive_search_2.exhaustive_search_by_object_unit;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 스승의 은혜 3_fail
+ */
 public class Main_10 {
 
     static int n, b;
