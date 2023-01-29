@@ -3,6 +3,9 @@ package Novice_mid.exhaustive_search_2.exhaustive_search_by_object_unit;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 개발자의 순위 fail
+ */
 public class Main_6 {
 
     static int k, n;
