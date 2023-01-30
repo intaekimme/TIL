@@ -7,8 +7,7 @@ import java.util.*;
  * 2023 kakao blind recruitment
  * 개인정보 수집 유효기간
  * 
- * 시뮬레이션 풀이
- * 1시간 걸림
+ * 날짜 함수와 해시 테이블 풀이
  */
 class Solution_1 {
 
@@ -24,72 +23,36 @@ class Solution_1 {
     }// end of main
 
     public int[] solution(String today, String[] terms, String[] privacies) {
-        List<Integer> res = new ArrayList<>();
+        List<Integer> answer = new ArrayList<>();
+        Map<String, Integer> termMap = new HashMap<>();
 
-        for (int i = 0; i < privacies.length; i++) {
-            String[] privacy = privacies[i].split(" ");
+        int date = getDate(today);
 
-            String date = privacy[0];
-
-            String term = privacy[1];
-
-            for (int j = 0; j < terms.length; j++) {
-                String[] tterm = terms[j].split(" ");
-
-                String find_term = tterm[0];
-                int month = Integer.parseInt(tterm[1]);
-
-                if (term.equals(find_term)) {
-                    if (isValid(today, date, month))
-                        res.add(i + 1);
-                }
-
-            } // end of inner for
-
-        } // end of outter for
-
-        int[] answer = new int[res.size()];
-        for (int i = 0; i < res.size(); i++)
-            answer[i] = res.get(i);
-
-        return answer;
-    }// end of sol
-
-    public boolean isValid(String today, String date, int month) {
-        StringTokenizer st = new StringTokenizer(today, ".");
-        int y = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int d = Integer.parseInt(st.nextToken());
-
-        st = new StringTokenizer(date, ".");
-        int d_y = Integer.parseInt(st.nextToken());
-        int d_m = Integer.parseInt(st.nextToken());
-        int d_d = Integer.parseInt(st.nextToken());
-
-        int tot_d = month * 28;
-
-        while (tot_d > 0) {
-            tot_d--;
-
-            d_d++;
-            if (d_d > 28) {
-                d_d = 1;
-                d_m++;
-            }
-            if (d_m > 12) {
-                d_m = 1;
-                d_y++;
-            }
+        // 약관은 확인만하므로 향상된 for문 사용
+        for (String s : terms) {
+            String[] term = s.split(" ");
+            termMap.put(term[0], Integer.parseInt(term[1]));
         }
 
-        if (d_y > y)
-            return false;
-        if (d_y >= y && d_m > m)
-            return false;
-        if (d_y >= y && d_m >= m && d_d > d)
-            return false;
-        return true;
+        // 모든 개인정보 확인
+        for (int i = 0; i < privacies.length; i++) {
+            String[] privacy = privacies[i].split(" ");
+            // 개인 정보 입력 날짜와 약관을 더한 만료날짜가 오늘 날짜보다 이전이면 파기해야할 자료이므로 추가
+            if (getDate(privacy[0]) + (termMap.get(privacy[1]) * 28) <= date)
+                answer.add(i + 1);
+        }
 
-    }// end of isValid
+        return answer.stream().mapToInt(integer -> integer).toArray();
+    }// end of sol
+
+    // 날짜 반환 함수, 0년 0월 0일 기준
+    private int getDate(String today) {
+        String[] date = today.split("\\.");
+        int year = Integer.parseInt(date[0]);
+        int month = Integer.parseInt(date[1]);
+        int day = Integer.parseInt(date[2]);
+
+        return (year * 12 * 28) + (month * 28) + day;
+    }
 
 }// end of class
