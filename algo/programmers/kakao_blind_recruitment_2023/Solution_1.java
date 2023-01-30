@@ -8,6 +8,7 @@ import java.util.*;
  * 개인정보 수집 유효기간
  * 
  * 시뮬레이션 풀이
+ * 1시간 걸림
  */
 class Solution_1 {
 
