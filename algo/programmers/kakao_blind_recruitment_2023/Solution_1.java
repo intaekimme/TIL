@@ -19,27 +19,25 @@ class Solution_1 {
         String[] terms = new String[] { "A 6", "B 12", "C 3" };
         String[] privacies = new String[] { "2021.05.02 A", "2021.07.01 B", "2022.02.19 C", "2022.02.20 C" };
 
-        ps.solution(today, terms, privacies);
+        int[] answer = ps.solution(today, terms, privacies);
+        System.out.println(Arrays.toString(answer));
     }// end of main
 
     public int[] solution(String today, String[] terms, String[] privacies) {
-        // System.out.println(y + " " + m + " " + d);
-
         List<Integer> res = new ArrayList<>();
 
-        StringTokenizer st;
         for (int i = 0; i < privacies.length; i++) {
-            st = new StringTokenizer(privacies[i]);
+            String[] privacy = privacies[i].split(" ");
 
-            String date = st.nextToken();
+            String date = privacy[0];
 
-            String term = st.nextToken();
+            String term = privacy[1];
 
             for (int j = 0; j < terms.length; j++) {
-                st = new StringTokenizer(terms[j]);
+                String[] tterm = terms[j].split(" ");
 
-                String find_term = st.nextToken();
-                int month = Integer.parseInt(st.nextToken());
+                String find_term = tterm[0];
+                int month = Integer.parseInt(tterm[1]);
 
                 if (term.equals(find_term)) {
                     if (isValid(today, date, month))
