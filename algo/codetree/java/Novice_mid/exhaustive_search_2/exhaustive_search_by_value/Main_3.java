@@ -26,7 +26,7 @@ public class Main_3 {
     public static boolean isMagicNumber(int n) {
         int[] number_cnt = new int[10];
 
-        int digit = 0;
+        int digit = 0; // 현재 판단중인 수의 자릿수
         while (true) {
             if (n < 10) {
                 number_cnt[n]++;
@@ -41,7 +41,7 @@ public class Main_3 {
         // System.out.println(Arrays.toString(number_cnt));
 
         for (int i = 0; i < 10; i++)
-            if (number_cnt[i] == digit - 1)
+            if (number_cnt[i] == digit - 1) // 흥미로운 수는 같은 수가 자릿수 - 1개가 존재하는 수
                 return true;
         return false;
 
