@@ -32,7 +32,7 @@ public class Main_6 {
             int cnt = 0;
 
             // 인덱스 0
-            if (arr[0] > 0)
+            if (arr[0] > h)
                 cnt++;
 
             // 빙산 확인
