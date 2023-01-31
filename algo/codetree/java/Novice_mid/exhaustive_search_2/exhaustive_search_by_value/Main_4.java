@@ -6,13 +6,18 @@ import java.util.*;
 /**
  * 정보에 따른 숫자 2
  * 
- * 정해진 범위에서 최단 거리를 '시뮬레이션'으로 찾음
+ * 각 문자별 위치정보를 기록
+ * 매 특별한 위치마다 모든 위치정보를 확인하며 최소거리 갱신
+ * 
+ * 도출된 S와 N의 최소거리를 비교
  */
 public class Main_4 {
-    static final int MAX_LEN = 1000;
+    static final int MAX_N = 100;
 
     static int T, a, b;
-    static char[] arr = new char[MAX_LEN + 1];
+    static int[] s = new int[MAX_N];
+    static int[] n = new int[MAX_N];
+
     static int ans = 0;
 
     public static void init() throws IOException {
@@ -23,53 +28,39 @@ public class Main_4 {
         a = Integer.parseInt(st.nextToken());
         b = Integer.parseInt(st.nextToken());
 
+        int sCnt = 0;
+        int nCnt = 0;
         for (int i = 0; i < T; i++) {
             st = new StringTokenizer(br.readLine());
             char c = st.nextToken().charAt(0);
             int pos = Integer.parseInt(st.nextToken());
 
-            arr[pos] = c;
+            if (c == 'S')
+                s[sCnt++] = pos;
+            else
+                n[nCnt++] = pos;
         }
     }// end of init
 
-    // 범위 내 존재하는지 판단
-    public static boolean inRange(int x) {
-        return 1 <= x && x <= MAX_LEN;
-    }
-
-    /*
-     * 특별한 위치 x로부터 양옆에 찾아야하는 알파벳이 최초 등장하는 순간의 거리 반환
-     */
-    public static int findMin(int x, char find) {
-        int x1 = x - 1;
-        int x2 = x + 1;
-        while (true) {
-            x1++;
-            x2--;
-
-            if (inRange(x1) && arr[x1] == find)
-                return Math.abs(x1 - x);
-            if (inRange(x2) && arr[x2] == find)
-                return Math.abs(x2 - x);
-            if (!inRange(x1) && !inRange(x2))
-                break;
-        }
-        return 0;
-    }// end of findMin
-
     public static void sol() {
         for (int x = a; x <= b; x++) {
-            int d1 = findMin(x, 'S');
-            int d2 = findMin(x, 'N');
+
+            int d1 = Integer.MAX_VALUE;
+            int d2 = Integer.MAX_VALUE;
+            for (int i = 0; i < T; i++) {
+                d1 = Math.min(d1, Math.abs(s[i] - x));
+                d2 = Math.min(d2, Math.abs(n[i] - x));
+            }
 
             if (d1 <= d2)
                 ans++;
         }
+
     }// end of sol
 
     public static void main(String[] args) throws IOException {
         init();
         sol();
         System.out.println(ans);
-    }// end of main
+    }
 }
