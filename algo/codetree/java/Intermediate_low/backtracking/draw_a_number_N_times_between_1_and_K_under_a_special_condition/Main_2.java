@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * k개 중 하나를 n번 선택하기(conditional)
- * 1차원 윷놀이
+ * 1차원 윷놀이_가지치기 안함
  */
 public class Main_2 {
 
