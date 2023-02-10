@@ -20,6 +20,8 @@ import java.util.*;
  * 실패
  * 원인 : 한 사람이 지나간 곳이 방문체크 되어서 다른사람이 지나가지 못함
  * 해결책 : 한 사람씩 시뮬레이션함
+ * 
+ * 다른 풀이로 도착지를 출발지로 해서 bfs를 하는 풀이도 있음
  */
 
 public class Main_3 {
@@ -28,10 +30,11 @@ public class Main_3 {
     static int n, h, m;
 
     static int[][] map = new int[MAX_N + 1][MAX_N + 1];
-    static boolean[][] visited = new boolean[MAX_N + 1][MAX_N + 1];
+    static boolean[][] visited;
     static int[][] ans = new int[MAX_N + 1][MAX_N + 1];
 
-    static Queue<int[]> que = new ArrayDeque<>();
+    static Queue<int[]> people = new ArrayDeque<>();
+    static Queue<int[]> que;
 
     public static void init() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -45,10 +48,8 @@ public class Main_3 {
             st = new StringTokenizer(br.readLine());
             for (int j = 1; j <= n; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
-                if (map[i][j] == 2) {
-                    visited[i][j] = true;
-                    que.offer(new int[] { i, j, i, j, 0 });
-                }
+                if (map[i][j] == 2)
+                    people.offer(new int[] { i, j, i, j, 0 });
             }
         }
     }// end of init
@@ -65,9 +66,21 @@ public class Main_3 {
         return true;
     }// end of canGo
 
-    public static void simulate() {
+    public static void bfs(int[] person) {
+
+        visited = new boolean[MAX_N + 1][MAX_N + 1];
+
         int[] dx = new int[] { -1, 1, 0, 0 };
         int[] dy = new int[] { 0, 0, -1, 1 };
+
+        que = new ArrayDeque<>();
+
+        int px = person[2];
+        int py = person[3];
+
+        visited[px][py] = true;
+
+        que.offer(person);
 
         while (!que.isEmpty()) {
             int[] cur = que.poll();
@@ -82,7 +95,7 @@ public class Main_3 {
 
             if (map[x][y] == 3) {
                 ans[sx][sy] = time;
-                continue;
+                break;
             }
 
             int search_end = 0;
@@ -98,12 +111,19 @@ public class Main_3 {
                     continue;
                 }
 
-                if (map[nx][ny] != 3) {
-                    visited[nx][ny] = true;
-                    visited[x][y] = false;
-                }
+                visited[nx][ny] = true;
                 que.offer(new int[] { sx, sy, nx, ny, time + 1 });
             }
+
+        }
+
+    }// end of bfs
+
+    public static void simulate() {
+
+        while (!people.isEmpty()) {
+            int[] person = people.poll();
+            bfs(person);
         } // end of while
 
     }// end of simulate
