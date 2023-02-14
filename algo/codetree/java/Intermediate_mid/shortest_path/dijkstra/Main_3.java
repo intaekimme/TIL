@@ -1,4 +1,4 @@
-package Intermediate_mid;
+package Intermediate_mid.shortest_path.dijkstra;
 
 import java.io.*;
 import java.util.*;
