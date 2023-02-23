@@ -42,9 +42,11 @@ const ButtonBlock = styled.div`
 const MainAccountCard = ({ bankName, fintechUseNo }) => {
   const handleQrButton = () => {
     console.log("QR 버튼 클릭");
+    window.location.href = `/qrcode?fintechUseNo=${fintechUseNo}`;
   };
   const handleBalanceButton = () => {
-    let tmpwindow = window.open("http://localhost:3000/balance");
+    // let tmpwindow = window.open("http://localhost:3000/balance");
+    window.location.href = `/balance?fintechUseNo=${fintechUseNo}`;
     console.log("잔액조회 버튼 클릭");
   };
   return (
