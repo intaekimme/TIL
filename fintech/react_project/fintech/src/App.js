@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NewsPage from "./pages/NewsPage";
 import IndexPage from "./pages/IndexPage";
 import AuthResultPage from "./pages/AuthResultPage";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<IndexPage />}></Route>
         <Route path="/authResult" element={<AuthResultPage />}></Route>
         <Route path="/news" element={<NewsPage />}></Route>
+        <Route path="/main" element={<MainPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

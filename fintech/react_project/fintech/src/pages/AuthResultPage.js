@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import AppHeader from "../components/Common/AppHeader";
 import queryString from "query-string";
@@ -19,10 +19,9 @@ const AuthResultPage = () => {
 
     const parsedSendData = queryString.stringify(sendData);
 
-    //   axios에 대한 옵션 지정
     const option = {
       method: "POST",
-      url: "https://testapi.openbanking.or.kr/oauth/2.0/token",
+      url: "/oauth/2.0/token",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
@@ -38,6 +37,9 @@ const AuthResultPage = () => {
       } else {
         alert("인증에 실패했습니다 다시 시도해 주세요");
       }
+
+      console.log("accessToken: ", localStorage.getItem("accessToken"));
+      console.log("userSeqNo: ", localStorage.getItem("userSeqNo"));
     });
   };
 
