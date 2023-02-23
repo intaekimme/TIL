@@ -15,6 +15,7 @@ const BalancePage = () => {
     getBalance();
     getTransactionList();
     console.log(genTransId);
+    console.log("accessToken: ", accessToken);
   }, []);
 
   const [balance, setBalance] = useState({});
