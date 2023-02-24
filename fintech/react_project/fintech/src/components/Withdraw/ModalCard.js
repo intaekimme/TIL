@@ -45,7 +45,7 @@ const ModalCard = ({ bankName, fintechUseNo, tofintechno }) => {
     //  data params json
     //  tran_amg, fintech_use_num, requ_client_fintech_use
     //  axios option으로 요청을 작성하기 <-  api 요청
-    //  application/jspn 은 데이터를 어떻게 전송?
+    //  application/json 은 데이터를 어떻게 전송?
     //  결과를 로그로 작성
     const data = {
       bank_tran_id: genTransId(),
@@ -75,11 +75,74 @@ const ModalCard = ({ bankName, fintechUseNo, tofintechno }) => {
     };
 
     axios(option).then(({ data }) => {
+      if (data.rsp_code === "A0000") {
+        deposit();
+      } else {
+        alert("출금 이체 실패");
+      }
       console.log(data);
     });
   };
 
-  const deposit = () => {};
+  const deposit = () => {
+    /**
+     * #Last Work
+     * 입금이체 작성해 주세요 !
+     * 2legged token 사용 !
+     * 입금을 하는 계좌를 잘 선택해 주세요
+     */
+    const twoLeggedToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJNMjAyMzAwNDA5Iiwic2NvcGUiOlsib29iIl0sImlzcyI6Imh0dHBzOi8vd3d3Lm9wZW5iYW5raW5nLm9yLmtyIiwiZXhwIjoxNjg0OTgzMzQ2LCJqdGkiOiJjYTdiYTIwZS0wMGYwLTQxMzgtYWRmYS0wNWEzYjc0M2NjY2YifQ.YNDmfqrf8ugw8w0svtu400LHjI8I_9RcCmvwAOwBpvY";
+
+    console.log(genTransId());
+
+    const data = {
+      cntr_account_type: "N",
+      cntr_account_num: "200000000001",
+      wd_pass_phrase: "NONE",
+      wd_print_content: "오픈캐시백서비스",
+      name_check_option: "on",
+      sub_frnc_name: "하위가맹점",
+      sub_frnc_num: "123456789012",
+      sub_frnc_business_num: "1234567890",
+      tran_dtime: "20230224113600",
+      req_cnt: "1",
+      req_list: [
+        {
+          tran_no: "1",
+          bank_tran_id: genTransId(),
+          fintech_use_num: fintechUseNo,
+          print_content: "오픈캐시백서비스",
+          tran_amt: amount,
+          req_client_name: "김인태",
+          req_client_bank_code: "097",
+          req_client_account_num: "200000000001",
+          req_client_num: "KIT938639",
+          transfer_purpose: "TR",
+          recv_bank_tran_id: genTransId(),
+          cms_num: "93848103221",
+          withdraw_bank_tran_id: genTransId(),
+        },
+      ],
+    };
+
+    const option = {
+      method: "POST",
+      url: "/v2.0/transfer/deposit/fin_num",
+      headers: {
+        Authorization: `Bearer ${twoLeggedToken}`,
+        scope: "oob",
+      },
+      data: data,
+    };
+
+    axios(option).then(({ data }) => {
+      if (data.rsp_code === "A0000") {
+        alert("결제 완료!");
+      }
+      console.log(data);
+    });
+  };
 
   const handleChange = (e) => {
     const { value } = e.target;
