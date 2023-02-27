@@ -5,8 +5,9 @@ import java.util.*;
 
 /**
  * 스타트링크, 5014
- * 두가지 연산을 다 이용, 대신 수학적으로 판별하려 해봄
- * 하지만 잘 되지 않음
+ * 
+ * bfs
+ * arr 배열은 해당 위치로 이동하는데 걸린 점프 횟수
  */
 
 public class Main_5014 {
@@ -22,32 +23,37 @@ public class Main_5014 {
         u = Integer.parseInt(st.nextToken());
         d = Integer.parseInt(st.nextToken());
 
-        int dir = 0;
-        if (s > g)
-            dir = -1;
-        else
-            dir = 1;
+        int[] arr = new int[f + 1];
 
-        if ((dir < 0 && d == 0) || (dir > 0 && u == 0)) {
-            System.out.println("use the stairs");
-            return;
+        Queue<Integer> que = new ArrayDeque<>();
+
+        arr[s] = 1;
+        que.offer(s);
+
+        while (!que.isEmpty()) {
+            int cur = que.poll();
+
+            if (cur == g) {
+                System.out.println(arr[cur] - 1);
+                System.exit(0);
+            }
+
+            if (cur + u <= f) {
+                if (arr[cur + u] == 0) {
+                    arr[cur + u] = arr[cur] + 1;
+                    que.offer(cur + u);
+                }
+            }
+
+            if (cur - d > 0) {
+                if (arr[cur - d] == 0) {
+                    arr[cur - d] = arr[cur] + 1;
+                    que.offer(cur - d);
+                }
+            }
         }
 
-        if ((dir > 0 && (Math.abs(s - g) % u) < d) || (dir < 0 && (Math.abs(s - g) % d) < u)) {
-            System.out.println("use the stairs");
-            return;
-        }
-
-        if ((dir < 0 && ((Math.abs(s - g) % d) % u != 0)) ||
-                (dir > 0 && ((Math.abs(s - g) % u) % d != 0))) {
-            System.out.println("use the stairs");
-            return;
-        }
-
-        if (dir < 0)
-            System.out.println((Math.abs(s - g) / d) + ((Math.abs(s - g) / d) / u));
-        else
-            System.out.println((Math.abs(s - g) / u) + ((Math.abs(s - g) / u) / d));
-
+        System.out.println("use the stairs");
     }// end of main
-}
+
+}// end of class
