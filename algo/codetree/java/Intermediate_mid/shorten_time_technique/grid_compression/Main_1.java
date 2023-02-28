@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * 점 개수 세기 3_fail
  */
+
 public class Main_1 {
 
     static int n, q;
@@ -31,15 +32,15 @@ public class Main_1 {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < q; i++) {
-            int cnt = 0;
             st = new StringTokenizer(br.readLine());
 
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
-            for (int j = s; j <= e; j++)
-                if (mapper.containsKey(j))
-                    cnt++;
-            sb.append(cnt).append("\n");
+
+            int s_val = mapper.get(s);
+            int e_val = mapper.get(e);
+
+            sb.append(e_val - s_val + 1).append("\n");
         }
 
         System.out.println(sb.toString());
