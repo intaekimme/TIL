@@ -5,6 +5,7 @@ import java.util.*;
 
 /**
  * 촌수계산 2644
+ * s2
  */
 
 public class Main_2644 {
