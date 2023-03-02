@@ -8,7 +8,7 @@ import java.util.*;
  * 
  */
 
-public class Main {
+public class Main_1697 {
 
     static final int MAX = (int) 1e5; // 100_000
 
