@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * N번째 큰 수
- * TreeSet과 pollFirst 메소드 실패 : 메모리초과
+ * PriorityQueue 성공
  */
 public class Main_2705 {
 
@@ -14,21 +14,21 @@ public class Main_2705 {
 
         int n = Integer.parseInt(br.readLine());
 
-        TreeSet<Integer> set = new TreeSet<>(Collections.reverseOrder());
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
         StringTokenizer st;
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < n; j++) {
-                set.add(Integer.parseInt(st.nextToken()));
+                pq.add(Integer.parseInt(st.nextToken()));
             }
         }
 
         for (int i = 0; i < n - 1; i++) {
-            set.pollFirst();
+            pq.poll();
         }
 
-        System.out.println(set.pollFirst());
+        System.out.println(pq.poll());
     }// end of main
 
 }// end of class
