@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * N번째 큰 수
- * TreeSet과 Iterator 실패 : 메모리초과
+ * TreeSet과 pollFirst 메소드 실패 : 메모리초과
  */
 public class Main_2705 {
 
@@ -24,12 +24,11 @@ public class Main_2705 {
             }
         }
 
-        Iterator<Integer> it = set.iterator();
         for (int i = 0; i < n - 1; i++) {
-            it.next();
+            set.pollFirst();
         }
 
-        System.out.println(it.next());
+        System.out.println(set.pollFirst());
     }// end of main
 
 }// end of class
