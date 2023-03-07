@@ -5,136 +5,91 @@ import java.util.*;
 
 /**
  * 2206 벽 부수고 이동하기 1
- * timeout
  * 
- * n이 1000이고, m이 1000이기 때문에
- * 가능한 벽의 갯수는 최대 1e6(10^6)이 된다.
+ * 벽을 한 번이라도 부순 경우와 한 번도 부수지 않은 경우를 나누어서 관리
  * 
- * 벽 하나하나를 부시는 경우를 모두 탐색하면
- * 1e6 * 1e6으로 총 1e12의 경우를 탐색해야 한다.
- * 이렇게 탐색하면 시간초과 발생
- * 
+ * 벽을 부수지 않은 경우는 벽을 부순 경우로 갈 수 있고
+ * 벽을 부순 경우는 벽을 부수지 않은 경우 그리고 벽을 추가로 부수는 경우로 갈 수 없기 때문
  */
 
 public class Main_2206 {
 
-    static final int MAX = (int) 1e6 + 1;
+    private static int N, M;
+    private static char[][] map;
 
-    static int n, m;
-    static char[][] map, copy;
-    static ArrayList<int[]> walls = new ArrayList<>();
+    private static int[] dx = { 0, 1, 0, -1 };
+    private static int[] dy = { 1, 0, -1, 0 };
+    private static boolean[][][] visited;
 
-    static int ans = MAX;
-
-    public static void init() throws IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-
-        map = new char[n][];
-        for (int i = 0; i < n; i++) {
+        map = new char[N][];
+        for (int i = 0; i < N; i++) {
             map[i] = br.readLine().toCharArray();
-            for (int j = 0; j < m; j++) {
-                if (map[i][j] == '1')
-                    walls.add(new int[] { i, j });
-            }
         }
 
-    }// end ofo init
+        Queue<int[]> que = new LinkedList<int[]>();
+        visited = new boolean[N][M][2];
+        que.add(new int[] { 0, 0, 1, 0 });
 
-    public static char[][] copyMap(int n, int m, char[][] map) {
-        char[][] res = new char[n][m];
-        for (int i = 0; i < n; i++) {
-            System.arraycopy(map[i], 0, res[i], 0, m);
-        }
-
-        return res;
-    }// end of copyMap
-
-    public static boolean outOfRange(int x, int y) {
-        return x < 0 || x >= n || y < 0 || y >= m;
-    }// end of outOfRange
-
-    public static boolean canGo(int x, int y, char[][] map, int[][] res) {
-        if (outOfRange(x, y))
-            return false;
-        if (res[x][y] != MAX || map[x][y] == '1')
-            return false;
-        return true;
-    }// end of canGo
-
-    public static int bfs(char[][] copy) {
-        int[] dx = new int[] { -1, 0, 1, 0 };
-        int[] dy = new int[] { 0, 1, 0, -1 };
-
-        int[][] res = new int[n][m];
-        for (int i = 0; i < n; i++)
-            Arrays.fill(res[i], MAX);
-
-        Queue<int[]> que = new ArrayDeque<>();
-
-        que.offer(new int[] { 0, 0 });
-        res[0][0] = 1;
-
+        int x = 0;
+        int y = 0;
         while (!que.isEmpty()) {
-            int[] cur = que.poll();
+            int[] coord = que.poll();
+            x = coord[0];
+            y = coord[1];
+            int dist = coord[2];
 
-            int x = cur[0];
-            int y = cur[1];
+            if (x == N - 1 && y == M - 1) {
+                System.out.println(dist);
+
+                printMap(visited);
+
+                System.exit(0);
+            }
 
             for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                if (!canGo(nx, ny, copy, res))
+                if (nx < 0 || nx >= N || ny < 0 || ny >= M)
                     continue;
+                if (map[nx][ny] == '0') {
+                    if (coord[3] == 0 && !visited[nx][ny][0]) {
+                        que.add(new int[] { nx, ny, dist + 1, 0 });
+                        visited[nx][ny][0] = true;
+                    } else if (coord[3] == 1 && !visited[nx][ny][1]) {
+                        que.add(new int[] { nx, ny, dist + 1, 1 });
+                        visited[nx][ny][1] = true;
 
-                res[nx][ny] = res[x][y] + 1;
-                que.offer(new int[] { nx, ny });
+                    }
+                } else {
+                    if (coord[3] == 0) {
+                        que.add(new int[] { nx, ny, dist + 1, 1 });
+                        visited[nx][ny][1] = true;
+                    }
+                }
             }
-        } // end of while
+        }
 
-        printMap(res);
+        System.out.println(-1);
+    }// end of main
 
-        return res[n - 1][m - 1];
-    }// end of bfs
+    public static void printMap(boolean[][][] map) {
+        System.out.println(map.length + ", " + map[0].length + ", " + map[0][0].length);
 
-    public static void sol() {
-
-        // 벽이 없는 경우
-        ans = Math.min(ans, bfs(map));
-
-        // 벽이 있는 경우
-        // for (int i = 0; i < walls.size(); i++) {
-        // // copy = copyMap(n, m, map);
-
-        // int[] broke_pos = walls.get(i);
-        // int x = broke_pos[0];
-        // int y = broke_pos[1];
-
-        // // copy[x][y] = '0';
-        // map[x][y] = '0';
-
-        // ans = Math.min(ans, bfs(map));
-
-        // map[x][y] = '1';
-
-        // }
-
-        System.out.println(ans == MAX ? -1 : ans);
-
-    }// end of sol
-
-    public static void printMap(int[][] map) {
-        for (int i = 0; i < n; i++)
-            System.out.println(Arrays.toString(map[i]));
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                for (int k = 0; k < map[i][j].length; k++)
+                    System.out.print(map[i][j][k] + " ");
+                System.out.println();
+            }
+            System.out.println("----------------------------");
+        }
     }
 
-    public static void main(String[] args) throws IOException {
-        init();
-        sol();
-    }// end of main
 }// end of class
