@@ -108,23 +108,24 @@ public class Main_2206 {
         ans = Math.min(ans, bfs(map));
 
         // 벽이 있는 경우
-        for (int i = 0; i < walls.size(); i++) {
-            // copy = copyMap(n, m, map);
+        // for (int i = 0; i < walls.size(); i++) {
+        // // copy = copyMap(n, m, map);
 
-            int[] broke_pos = walls.get(i);
-            int x = broke_pos[0];
-            int y = broke_pos[1];
+        // int[] broke_pos = walls.get(i);
+        // int x = broke_pos[0];
+        // int y = broke_pos[1];
 
-            // copy[x][y] = '0';
-            map[x][y] = '0';
+        // // copy[x][y] = '0';
+        // map[x][y] = '0';
 
-            ans = Math.min(ans, bfs(map));
+        // ans = Math.min(ans, bfs(map));
 
-            map[x][y] = '1';
+        // map[x][y] = '1';
 
-        }
+        // }
 
         System.out.println(ans == MAX ? -1 : ans);
+
     }// end of sol
 
     public static void printMap(int[][] map) {
