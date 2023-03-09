@@ -4,7 +4,10 @@ import java.util.*;
 
 /**
  * 아이템 줍기, lv3
- * fail
+ * sol
+ * 
+ * 2배로 맵을 키우는 문제
+ * 2배로 키우지 않으면 길이 1차이로 인해 탐색이 되지 않아야할 곳이 탐색이 되는 경우가 발생!
  */
 
 class Solution_5 {
@@ -15,7 +18,6 @@ class Solution_5 {
 
     int[][] map;
     int[][] dist;
-    // int[][] visited;
 
     int[] dx = new int[] { -1, 0, 1, 0 };
     int[] dy = new int[] { 0, 1, 0, -1 };
@@ -23,11 +25,9 @@ class Solution_5 {
     public void init() {
         map = new int[MAX_N][MAX_N];
         dist = new int[MAX_N][MAX_N];
-        // visited = new int[MAX_N][MAX_N];
 
         for (int i = 0; i < MAX_N; i++) {
             Arrays.fill(dist[i], -1);
-            // Arrays.fill(visited[i], 2);
         }
 
     }// end of init
@@ -44,20 +44,22 @@ class Solution_5 {
             min_y = Math.min(min_y, leftBottomY);
             max_y = Math.max(max_y, rightTopY);
 
-            for (int y = leftBottomY; y <= rightTopY; y++) {
-                for (int x = leftBottomX; x <= rightTopX; x++) {
-                    if (map[y][x] == 1)
+            // 테두리는 1, 내부는 2로 표시
+            for (int x = leftBottomX; x <= rightTopX; x++) {
+                for (int y = leftBottomY; y <= rightTopY; y++) {
+                    if (map[x][y] == 2)
                         continue;
-                    map[y][x] = 1;
+                    map[x][y] = 2;
                     if (x == leftBottomX || x == rightTopX || y == leftBottomY || y == rightTopY)
-                        map[y][x] = 2;
+                        map[x][y] = 1;
                 }
             }
         }
 
+        // 내부는 다시 0으로 표시
         for (int i = 0; i < MAX_N; i++) {
             for (int j = 0; j < MAX_N; j++) {
-                if (map[i][j] >= 2)
+                if (map[i][j] == 2)
                     map[i][j] = 0;
             }
         }
@@ -70,7 +72,7 @@ class Solution_5 {
     public boolean canGo(int x, int y) {
         if (outOfRange(x, y))
             return false;
-        if (dist[x][y] != -1 || map[x][y] != 2)
+        if (dist[x][y] != -1 || map[x][y] != 1)
             return false;
         return true;
     }// end of canGo
@@ -79,7 +81,6 @@ class Solution_5 {
         Queue<int[]> que = new ArrayDeque<>();
 
         dist[sx][sy] = 1;
-        // visited[sx][sy]--;
         que.offer(new int[] { sx, sy });
 
         while (!que.isEmpty()) {
@@ -109,10 +110,10 @@ class Solution_5 {
 
         bfs(2 * characterX, 2 * characterY);
 
-        printMap(map);
+        // printMap(map);
         // printMap(dist);
 
-        answer = dist[2 * itemX][2 * itemY];
+        answer = dist[2 * itemX][2 * itemY] / 2;
 
         return answer;
     }// end of solution
@@ -120,8 +121,8 @@ class Solution_5 {
     public void printMap(int[][] map) {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = min_y; i <= max_y + 1; i++) {
-            for (int j = min_x; j <= max_x + 1; j++) {
+        for (int i = min_x; i <= max_x + 1; i++) {
+            for (int j = min_y; j <= max_y + 1; j++) {
                 sb.append(map[i][j]).append(" ");
             }
             sb.append("\n");
