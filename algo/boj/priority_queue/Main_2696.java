@@ -8,7 +8,7 @@ import java.util.*;
  * 코드트리 중앙값 구하기와 동일한 문제
  */
 
-public class Main {
+public class Main_2696 {
 
     static int TC, M;
     static PriorityQueue<Integer> minHeap;
