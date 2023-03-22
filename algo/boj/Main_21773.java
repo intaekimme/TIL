@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * 21773 가희와 프로세스 1
  */
-public class Main_ {
+public class Main_21773 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
