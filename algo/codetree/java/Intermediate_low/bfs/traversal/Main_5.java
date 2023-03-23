@@ -146,7 +146,7 @@ public class Main_5 {
             }
         }
 
-        printMap(after);
+        // printMap(after);
         copyMap(after, map);
 
     }// end of meltIceberg
@@ -159,8 +159,7 @@ public class Main_5 {
     public static void sol() {
         while (getCountIceberg() > 0) {
             meltIceberg();
-
-            System.out.println("------------------------");
+            // System.out.println("------------------------");
             time++;
         }
 
