@@ -21,7 +21,55 @@ import java.util.*;
  */
 
 public class Main_5 {
-    public static void main(String[] args) throws IOException {
 
+    static int n, m;
+    static int min_h = 16;
+    static int max_h = 0;
+
+    static int[][] input;
+
+    static int[][] ladder;
+
+    public static void init() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+
+        input = new int[m][2];
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+
+            input[i][0] = Integer.parseInt(st.nextToken());
+            input[i][1] = Integer.parseInt(st.nextToken());
+
+            min_h = Math.min(min_h, input[i][1]);
+            max_h = Math.min(max_h, input[i][1]);
+        }
+
+        ladder = new int[max_h * 2][n * 2];
+
+        //  사다리 가로줄
+        for (int i = 0; i < n * 2; i += 2) {
+            for (int j = 0; j < max_h * 2; j++)
+                ladder[i][j] = 1;
+        }
+
+        for (int i = 0; i < m; i++) {
+            int start = input[i][0] * 2;
+            int end = start + 2;
+
+            int h = input[i][1];
+            for (int j = start; j <= end; j++) {
+                ladder[][j] = 1;
+            }
+        }
+
+    }// end of init
+
+    public static void main(String[] args) throws IOException {
+        init()
     }// end of main
 }// end of class
