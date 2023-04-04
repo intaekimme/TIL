@@ -136,9 +136,64 @@ public class Main_21609 {
         }
     }// end of findBlockGroup
 
+    // 블록 제거 함수
     public static void deleteBlockGroup(BlockGroup group) {
+        int len = group.blocks.size();
+        for (int i = 0; i < len; i++) {
+            int[] pos = group.blocks.get(i);
+
+            int x = pos[0];
+            int y = pos[1];
+
+            map1[x][y] = -2; // 빈 칸 처리
+
+        }
+
+        // 점수 획득
+        ans += len * len;
 
     }// end of deleteBlockGroup
+
+    public static void down(int val, int sr, int sc, int[][] copy) {
+        for (int r = sr; r < n; r++) {
+            // 확인한 좌표가 빈 칸이 아닌 경우, 일반 블럭이나 검은색 블럭이 존재하는 경우
+            // 그 위에 블럭을 놓는다
+            if (copy[r][sc] != -2) {
+                copy[r - 1][sc] = val;
+                break;
+            }
+        }
+    }// end of down
+
+    public static void gravity(int[][] origin, int[][] copy) {
+        // 복사본 배열 생성
+        copy = new int[n][n];
+
+        // 복사본 배열 초기화
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(copy[i], -2);
+        }
+
+        // 밑에서 부터 위로
+        // 검은색 블럭(-1)은 움직이지 않는다.
+        // 따라서 -1부터 처리
+        for (int j = 0; j < n; j++) {
+            for (int i = n - 1; i >= 0; i--) {
+                if (origin[i][j] == -1)
+                    copy[i][j] = -1;
+            }
+        }
+
+        for (int j = 0; j < n; j++) {
+            for (int i = n - 1; i >= 0; i--) {
+                // 빈 칸이거나 검은색 블럭이면 제외
+                if (origin[i][j] == -2 || origin[i][j] == -1)
+                    continue;
+                down(origin[i][j], i, j, copy);
+            }
+
+        }
+    }// end of gravity
 
     public static void simulation() {
         while (true) {
@@ -154,8 +209,11 @@ public class Main_21609 {
             // 가장 큰 블록 그룹
             BlockGroup maxSizeBlockGroup = pq.peek();
 
-            // 가장 큰 블록 그룹 제거
+            // 가장 큰 블록 그룹 제거 (map1)
             deleteBlockGroup(maxSizeBlockGroup);
+
+            // 중력 작용
+            gravity(map1, map2);
 
         } // end of while
 
