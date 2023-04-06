@@ -6,10 +6,10 @@ import java.util.*;
 /**
  * 나무 박멸
  * 삼성 SW 역량테스트 2022 상반기 오후 2번 문제
- * g4 fail
+ * g4 tc 7 fail
  */
 
-public class Main {
+public class Main_1 {
 
     static int n, m, k, c;
 
@@ -18,7 +18,7 @@ public class Main {
     static ArrayList<int[]> pos;
 
     static int[] dx = new int[] { -1, 0, 1, 0 };
-    static int[] dy = new int[] { 0, 1, -1, 0 };
+    static int[] dy = new int[] { 0, 1, 0, -1 };
 
     static int[] cx = new int[] { -1, 1, 1, -1 };
     static int[] cy = new int[] { 1, 1, -1, -1 };
@@ -86,6 +86,7 @@ public class Main {
 
     // 나무 자라기
     public static void grow() {
+        // printMapToxic();
         Node[][] copy = new Node[n][n];
 
         copy = copyMap(map, copy);
@@ -110,7 +111,7 @@ public class Main {
     public static boolean canBreed(int x, int y) {
         if (outOfRange(x, y)) // 격자 범위 밖
             return false;
-        if (map[x][y].tree > 0 || map[x][y].toxic) // 다른 나무가 있거나, 제초제가 있으면 제외
+        if (map[x][y].tree != 0 || map[x][y].toxic) // 다른 나무가 있거나 벽이거나, 제초제가 있으면 제외
             return false;
         return true;
     }// end of canBreed
@@ -168,6 +169,8 @@ public class Main {
 
                 // 파종 기록
                 breed = sowing(i, j, tot_can_breed_area, breed);
+                // System.out.println("===========breed============");
+                // printMap(breed);
             }
         }
 
@@ -185,8 +188,12 @@ public class Main {
     }// end of breed
 
     public static int getDeletedTree(int x, int y) {
+        // StringBuilder sb = new StringBuilder();
+
+        // sb.append("x : ").append(x).append(", y : ").append(y).append("; ");
         // 박멸되는 나무 수
         int cnt = map[x][y].tree;
+        // sb.append("cnt : ").append(cnt).append(" ").append("\n");
 
         // 해당 방향으로 계속 찾을지
         boolean[] isKeepGoing = new boolean[4];
@@ -198,8 +205,8 @@ public class Main {
                 if (!isKeepGoing[j]) // 해당 방향으로 계속 찾을지
                     continue;
 
-                int nx = x + cx[j] * k;
-                int ny = y + cy[j] * k;
+                int nx = x + cx[j] * i;
+                int ny = y + cy[j] * i;
 
                 if (!canTree(nx, ny)) { // 나무가 없으면 제외
                     isKeepGoing[j] = false;
@@ -207,8 +214,12 @@ public class Main {
                 }
 
                 cnt += map[nx][ny].tree;
+                // sb.append("nx : ").append(nx).append(" , ny : ").append(ny).append(", tree :
+                // ").append(map[nx][ny].tree)
+                // .append(" , cnt : ").append(cnt).append("\n");
             }
         }
+        // System.out.println(sb.toString());
         return cnt;
     }// end of getDeletedTree
 
@@ -241,32 +252,46 @@ public class Main {
         // 가장 많이 나무가 박멸되는 장소 찾기
         Collections.sort(pos, comparator);
 
+        // StringBuilder sb = new StringBuilder();
+        // for (int[] arr : pos)
+        // sb.append(Arrays.toString(arr)).append(" ");
+        // sb.append("\n");
+        // System.out.println(sb.toString());
+
+        if (pos.isEmpty())
+            return new int[] { -1, -1, -1 };
+
         return pos.get(0);
     }// end of findToxicPos
 
     public static void delete(int[] pos) {
-        int x = pos[1];
-        int y = pos[2];
 
-        // 제초제를 뿌린 중심의 나무 박멸
-        map[x][y].tree = 0;
-        map[x][y].toxic = true;
-        map[x][y].t_time = c;
+        if (pos[0] == -1)
+            return;
 
         // 제초제를 뿌리기 전 제초제 년 수 감소
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 // 제초제가 뿌려져 있으면
-                if (map[x][y].toxic) {
-                    if (map[x][y].t_time > 0) // 제초제 시간이 남아 있으면
-                        map[x][y].t_time--; // 1년씩 감소
+                if (map[i][j].toxic) {
+                    if (map[i][j].t_time > 0) // 제초제 시간이 남아 있으면
+                        map[i][j].t_time--; // 1년씩 감소
                     else { // 제초제 시간을 다 썼으면
-                        map[x][y].toxic = false;
-                        map[x][y].t_time = 0;
+                        map[i][j].toxic = false;
+                        map[i][j].t_time = 0;
                     }
                 }
             }
         }
+
+        int x = pos[1];
+        int y = pos[2];
+
+        // 제초제를 뿌린 중심의 나무 박멸
+        ans += map[x][y].tree;
+        map[x][y].tree = 0;
+        map[x][y].toxic = true;
+        map[x][y].t_time = c;
 
         // 해당 방향으로 계속 뿌릴지
         boolean[] isKeepGoing = new boolean[4];
@@ -278,8 +303,8 @@ public class Main {
                 if (!isKeepGoing[j]) // 해당 방향으로 계속 찾을지
                     continue;
 
-                int nx = x + cx[j] * k;
-                int ny = y + cy[j] * k;
+                int nx = x + cx[j] * i;
+                int ny = y + cy[j] * i;
 
                 // 범위 밖이면 그만
                 if (outOfRange(nx, ny))
@@ -302,15 +327,62 @@ public class Main {
                 map[nx][ny].tree = 0;
             }
         }
+        // System.out.println("ans : " + ans);
     }// end of delete
 
+    public static void printMap() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                sb.append(map[i][j].tree).append(" ");
+            }
+            sb.append("\n");
+        }
+        sb.append("\n");
+        System.out.println(sb.toString());
+    }
+
+    public static void printMapToxic() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                sb.append(map[i][j].toxic).append(" ");
+            }
+            sb.append("\n");
+        }
+        sb.append("\n");
+        System.out.println(sb.toString());
+    }
+
+    public static void printMap(int[][] map) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                sb.append(map[i][j]).append(" ");
+            }
+            sb.append("\n");
+        }
+        sb.append("\n");
+        System.out.println(sb.toString());
+    }
+
     public static void main(String[] args) throws IOException {
+
         init();
         while (m-- > 0) {
+            System.out.println((m + 1) + " year=======================");
             grow();
+            System.out.println("grow");
+            printMap();
+
             breed();
+            System.out.println("breed");
+            printMap();
+
             int[] deleted_pos = findToxicPos();
             delete(deleted_pos);
+            System.out.println("delete");
+            printMap();
         }
 
         System.out.println(ans);
