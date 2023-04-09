@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * 1059 좋은 구간 s4
- * fail
+ * sol
  */
 
 public class Main_1059 {
@@ -16,6 +16,7 @@ public class Main_1059 {
         if (depth == 2) {
             for (int i = selected[0]; i <= selected[1]; i++) {
                 if (i == n) {
+                    // System.out.println(selected[0] + " " + selected[1]);
                     cnt++;
                     return;
                 }
@@ -44,8 +45,17 @@ public class Main_1059 {
 
         Arrays.sort(arr);
 
+        int[] tmp = new int[L + 1];
+        if (arr[0] != 1) {
+            for (int i = 1; i < L + 1; i++)
+                tmp[i] = arr[i - 1];
+            arr = new int[L + 1];
+            for (int i = 0; i < L + 1; i++)
+                arr[i] = tmp[i];
+        }
+
         int[] selected = new int[2];
-        for (int i = 0; i < L - 1; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             int s = arr[i];
             int e = arr[i + 1];
 
@@ -55,3 +65,7 @@ public class Main_1059 {
         System.out.println(cnt);
     }// end of main
 }// end of class
+
+// 3
+// 7 8 9
+// 2
