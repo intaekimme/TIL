@@ -4,7 +4,18 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 5427 불
+ * 5427 불 g4
+ * 23.04.11
+ * 1시간 10분
+ * 92780kb, 820ms
+ * 
+ * 상근이가 있는 칸에 불이 옮겨옴과 동시에 다른 칸으로 이동할 수 있다.
+ * = 불은 상근이가 있는 자리도 빈칸으로 여기고 퍼짐.
+ * = 상근이는 불이 있는 곳으로 못가기 때문에 상근이가 먼저 움직여야 한다.
+ * 대신 이 후 상근이가 움직일 수 있는 자리가 불이 번져서 갈 수 없는 공간이면 추가 탐색을 생략한다.
+ *
+ * 상근이가 탈출하는데 가장 빠른 시간을 확인해야 하므로 bfs 사용
+ * 
  */
 
 public class Main_5427 {
@@ -74,6 +85,7 @@ public class Main_5427 {
         int[] dx = new int[] { -1, 0, 1, 0 };
         int[] dy = new int[] { 0, 1, 0, -1 };
 
+        // 상근이 움직임 관리
         Queue<int[]> que = new ArrayDeque<>();
 
         boolean[][] visited = new boolean[h][w];
@@ -87,6 +99,7 @@ public class Main_5427 {
 
         que.offer(pos);
 
+        // 불 번짐 관리
         Queue<int[]> fire_que = new ArrayDeque<>();
         boolean[][] fire_visited = new boolean[h][w];
 
@@ -96,6 +109,7 @@ public class Main_5427 {
             fire_que.offer(fire_pos.get(i));
         }
 
+        // 상근이가 더 이상 움직이지 못하면 종료
         while (!que.isEmpty()) {
 
             int size = que.size();
