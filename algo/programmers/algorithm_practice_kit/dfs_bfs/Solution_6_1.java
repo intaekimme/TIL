@@ -28,7 +28,7 @@ import java.util.*;
 class Solution_6_1 {
 
     boolean[] visited;
-    ArrayList<ArrayList<String>> ans;
+    ArrayList<ArrayList<String>> res;
 
     public int getRemainTicket() {
         int cnt = 0;
@@ -43,9 +43,13 @@ class Solution_6_1 {
         // 기저 조건
         if (getRemainTicket() == 0) {
             // System.out.println(record.toString());
-            if (record.size() > 1)
-                ans.add(record);
-            System.out.println(ans.toString());
+
+            // 복사
+            ArrayList<String> cand = new ArrayList<>();
+            for (String str : record)
+                cand.add(str);
+
+            res.add(cand);
             return;
         }
 
@@ -77,7 +81,7 @@ class Solution_6_1 {
     }// end of search
 
     public String[] solution(String[][] tickets) {
-        ans = new ArrayList<>();
+        res = new ArrayList<>();
         visited = new boolean[tickets.length];
 
         for (int i = 0; i < tickets.length; i++) {
@@ -94,13 +98,50 @@ class Solution_6_1 {
             } // end of if
         } // end of for
 
-        // for (ArrayList<String> list : ans) {
-        // for (String str : list)
-        // System.out.print(str + " ");
-        // System.out.println();
-        // }
+        ArrayList<String> answer = res.get(0);
 
-        return new String[] { "" };
+        boolean[] visit = new boolean[res.size()];
+        int size = res.get(0).size();
+
+        if (res.size() > 1) {
+            for (int i = 0; i < size; i++) {
+                int cnt = 0;
+                for (int j = 0; j < res.size(); j++) {
+                    if (visit[j])
+                        cnt++;
+                }
+                if (cnt == res.size() - 1) {
+                    break;
+                }
+
+                PriorityQueue<String> pq = new PriorityQueue<>();
+
+                for (int j = 0; j < res.size(); j++) {
+                    if (visit[j])
+                        continue;
+                    pq.add(res.get(j).get(i));
+                }
+
+                String min = pq.poll();
+
+                for (int j = 0; j < res.size(); j++) {
+                    if (!visit[j] && min.compareTo(res.get(j).get(i)) < 0)
+                        visit[j] = true;
+                    else {
+                        if (!visit[j])
+                            answer = res.get(j);
+                    }
+                }
+            } // end of for
+        } // end of if
+
+        String[] ret = new String[answer.size()];
+        for (int i = 0; i < answer.size(); i++)
+            ret[i] = answer.get(i);
+
+        System.out.println(answer.toString());
+
+        return ret;
     }// end of solution
 
     public static void main(String[] args) {
