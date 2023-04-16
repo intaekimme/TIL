@@ -6,7 +6,8 @@ import java.util.*;
 /**
  * 아기 상어 16236 g3
  * 
- * 
+ * 1시간 30분
+ * 25236kb, 248ms
  */
 
 public class Main_16236 {
