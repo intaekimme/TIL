@@ -20,6 +20,11 @@ public class Main_1593 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        System.out.println((int) 'A' - 'A');
+        System.out.println((int) 'Z' - 'A');
+        System.out.println((int) 'a' - 'A');
+        System.out.println((int) 'z' - 'A');
+
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int g = Integer.parseInt(st.nextToken());
@@ -28,37 +33,39 @@ public class Main_1593 {
         String W = br.readLine();
         String S = br.readLine();
 
-        Set<Character> set = new HashSet<>();
-
+        int[] wCnt = new int[61];
+        int[] sCnt = new int[61];
         for (int i = 0; i < g; i++) {
-            set.add(W.charAt(i));
+            wCnt[W.charAt(i) - 'A']++;
+            sCnt[S.charAt(i) - 'A']++;
         }
 
-        Iterator<Character> it = set.iterator();
+        int ans = 0;
 
-        int[] pos = new int[set.size()];
+        // 하나 전을 체크하고 +1 슬라이딩 시킴
+        for (int i = g; i < s; i++) {
+            if (check(wCnt, sCnt))
+                ans++;
+            sCnt[S.charAt(i) - 'A']++;
+            sCnt[S.charAt(i - g) - 'A']--;
+        } // end of for
 
-        for (int i = 0; i < pos.length; i++) {
-            char c = it.next();
-            System.out.println(c + " " + (int) c);
-            pos[i] = c - 'A';
-        }
+        // i = s - 1일 때 s - 2체크 후 +1 슬라이딩 시키고 i < s 조건 위배로 탈출
+        // 따라서 s - 1일 때르 체크 못함
+        // 그래서 마지막에 체크해줘야함
+        if (check(wCnt, sCnt))
+            ans++;
 
-        int[] origin = new int[61];
-        for (int i = 0; i < g; i++) {
-            origin[W.charAt(i) - 'A']++;
-        }
+        System.out.println(ans);
 
-        // System.out.println(Arrays.toString(origin));
-
-        // for (int i = 0; i < pos.length; i++) {
-        // System.out.print(origin[pos[i]] + " ");
-        // }
-
-        for (int i = 0; i <= s - g; i++) {
-            for (int j = 0; j < g; j++) {
-
-            }
-        }
     }// end of main
+
+    public static boolean check(int[] wCnt, int[] sCnt) {
+        for (int i = 0; i < 61; i++) {
+            if (wCnt[i] != sCnt[i])
+                return false;
+        }
+        return true;
+    }// end of check
+
 }// end of class
