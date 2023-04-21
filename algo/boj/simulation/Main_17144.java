@@ -9,7 +9,7 @@ import java.util.*;
  * 
  */
 
-public class Main {
+public class Main_17144 {
 
     static int R, C, T;
     static int[][] map;
