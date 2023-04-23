@@ -86,53 +86,107 @@ public class Main_17144 {
     }// end of diffusion
 
     public static void rotate(int x, int y, boolean isCW) {
-        if (isCW) {
-            //  시계방향
+        if (!isCW) {
+            // 반시계 방향 (위)
             int[] tmp = new int[4];
             tmp[0] = map[x][y];
-            tmp[1] = map[x][C];
-            tmp[2] = map[0][C];
+            tmp[1] = map[x][C - 1];
+            tmp[2] = map[0][C - 1];
             tmp[3] = map[0][0];
 
-
-
-
-        } else {
-            //  반시계 방향
-            int[] tmp = new int[4];
-            tmp[0] = map[x][y];
-            tmp[1] = map[x][C];
-            tmp[2] = map[R][C];
-            tmp[3] = map[R][y];
-
-            int[] copy = new int[C];
-            //  우
-            for (int i = C - 1; i >= 0; i--) {
+            // 우
+            for (int i = C - 1; i > 1; i--) {
                 map[x][i] = map[x][i - 1];
             }
-            
-            //  하
-            for (int i = R - 1; i >= x; i--) {
-                map[i][C] = map[i - 1][C];
+            map[x][1] = 0;
+
+            // 상
+            for (int i = 0; i < x - 1; i++) {
+                map[i][C - 1] = map[i + 1][C - 1];
             }
-            map[x + 1][C] = tmp[1];
-            
-            //  좌
-            for (int i = 0; i < C; i++) {
-                map[R - 1][i] = map[R - 1][]
+            map[x - 1][C - 1] = tmp[1];
+
+            // 좌
+            for (int i = 0; i < C - 1; i++) {
+                map[0][i] = map[0][i + 1];
             }
-            //  상
+            map[0][C - 2] = tmp[2];
+
+            // 하
+            for (int i = x - 1; i > 0; i--) {
+                map[i][0] = map[i - 1][0];
+            }
+
+        } else {
+            // 시계방향 (아래)
+            int[] tmp = new int[4];
+            tmp[0] = map[x][y];
+            tmp[1] = map[x][C - 1];
+            tmp[2] = map[R - 1][C - 1];
+            tmp[3] = map[R - 1][y];
+
+            // 우
+            for (int i = C - 1; i > 1; i--) {
+                map[x][i] = map[x][i - 1];
+            }
+            map[x][1] = 0;
+
+            // 하
+            for (int i = R - 1; i > x; i--) {
+                map[i][C - 1] = map[i - 1][C - 1];
+            }
+            map[x + 1][C - 1] = tmp[1];
+
+            // 좌
+            for (int i = 0; i < C - 1; i++) {
+                map[R - 1][i] = map[R - 1][i + 1];
+            }
+            map[R - 1][C - 2] = tmp[2];
+
+            // 상
+            for (int i = x; i < R - 1; i++) {
+                map[i][0] = map[i + 1][0];
+            }
+            map[R - 1][y] = tmp[3];
+
+            map[x][y] = 0;
 
         }
     }// end of rotate
+
+    public static int getCountDust() {
+        int cnt = 2;
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                if (map[i][j] > 0)
+                    cnt += map[i][j];
+            }
+        }
+        return cnt;
+    }// end of getCountDust
 
     public static void simulation() {
         while (T-- > 0) {
             diffusion();
             rotate(up[0], up[1], true);
             rotate(down[0], down[1], false);
+            printMap();
         }
+
+        System.out.println(getCountDust());
     }// end of simulation
+
+    public static void printMap() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                sb.append(map[i][j]).append(" ");
+            }
+            sb.append("\n");
+        }
+
+        System.out.print(sb.toString());
+    }// end of printMap
 
     public static void main(String[] args) throws IOException {
         init();
