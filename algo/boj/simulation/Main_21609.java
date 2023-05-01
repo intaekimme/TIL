@@ -37,7 +37,7 @@ public class Main_21609 {
 
         map1 = new int[n][n];
         for (int i = 0; i < n; i++) {
-            st = new StringTokenizer(st.nextToken());
+            st = new StringTokenizer(br.readLine());
             for (int j = 0; j < n; j++)
                 map1[i][j] = Integer.parseInt(st.nextToken());
         }
@@ -154,46 +154,41 @@ public class Main_21609 {
 
     }// end of deleteBlockGroup
 
-    public static void down(int val, int sr, int sc, int[][] copy) {
-        for (int r = sr; r < n; r++) {
-            // 확인한 좌표가 빈 칸이 아닌 경우, 일반 블럭이나 검은색 블럭이 존재하는 경우
-            // 그 위에 블럭을 놓는다
-            if (copy[r][sc] != -2) {
-                copy[r - 1][sc] = val;
-                break;
-            }
-        }
-    }// end of down
-
-    public static void gravity(int[][] origin, int[][] copy) {
-        // 복사본 배열 생성
-        copy = new int[n][n];
-
-        // 복사본 배열 초기화
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(copy[i], -2);
-        }
-
-        // 밑에서 부터 위로
-        // 검은색 블럭(-1)은 움직이지 않는다.
-        // 따라서 -1부터 처리
+    public static void gravity(int[][] origin) {
         for (int j = 0; j < n; j++) {
-            for (int i = n - 1; i >= 0; i--) {
-                if (origin[i][j] == -1)
-                    copy[i][j] = -1;
-            }
-        }
-
-        for (int j = 0; j < n; j++) {
+            int blank = 0;
             for (int i = n - 1; i >= 0; i--) {
                 // 빈 칸이거나 검은색 블럭이면 제외
-                if (origin[i][j] == -2 || origin[i][j] == -1)
-                    continue;
-                down(origin[i][j], i, j, copy);
+                if (origin[i][j] == -2)
+                    blank++;
+                else if (origin[i][j] == -1)
+                    blank = 0;
+                else {
+                    if (blank != 0) {
+                        origin[i + blank][j] = origin[i][j];
+                        origin[i][j] = -2;
+                    }
+                }
             }
-
         }
     }// end of gravity
+
+    public static void rotate(int[][] origin) {
+        int[][] copy = new int[n][n];
+
+        for (int y = 0; y < n; y++) {
+            for (int x = 0; x < n; x++) {
+                copy[n - 1 - x][y] = origin[y][x];
+            }
+        }
+
+        for (int y = 0; y < n; y++) {
+            for (int x = 0; x < n; x++) {
+                origin[y][x] = copy[n - 1 - x][y];
+            }
+        }
+
+    }// end of rotate
 
     public static void simulation() {
         while (true) {
@@ -213,7 +208,12 @@ public class Main_21609 {
             deleteBlockGroup(maxSizeBlockGroup);
 
             // 중력 작용
-            gravity(map1, map2);
+            gravity(map1);
+
+            // 90도 회전
+            rotate(map1);
+
+            gravity(map1);
 
         } // end of while
 
