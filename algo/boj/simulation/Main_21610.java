@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * 마법사 상어와 비바라기, g5
  * 
+ * somthing commit
  */
 
 public class Main_21610 {
