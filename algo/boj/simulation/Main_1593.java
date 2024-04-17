@@ -58,6 +58,8 @@ public class Main_1593 {
 
         System.out.println(ans);
 
+        StringBuilder sb = new StringBuilder();
+
     }// end of main
 
     public static boolean check(int[] wCnt, int[] sCnt) {

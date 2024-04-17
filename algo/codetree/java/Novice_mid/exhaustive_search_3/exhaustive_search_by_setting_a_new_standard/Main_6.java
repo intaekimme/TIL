@@ -6,15 +6,12 @@ import java.util.*;
 /**
  * A, B, C, D 찾기 2
  * 
- * 하드코딩의 문제점. 인풋으로 주어진 결과의 1,2,3,4 인덱스가 a, b, c, d와 일치할 것이라고 생각한 것이 패착
+ * 하드코딩이지만 맞는 것
  * 
- * input : 10 10 10 7 4 3 7 7 3 14 14 11 13 6 17
- * 정렬 : [3, 3, 4, 6, 7, 7, 7, 10, 10, 10, 11, 13, 14, 14, 17]
+ * 선택된 a, b, c, d로 구하려는 형식의 배열 생성
+ * 생성된 원소가 모두 맞는 경우 출력
  * 
- * a=3, b=3, c=4, d=7 일 경우
- * 4번 index에서 맞지 않는 문제 발생
  * 
- * fail
  */
 
 public class Main_6 {
@@ -36,47 +33,14 @@ public class Main_6 {
             for (int b = a; b <= max; b++) {
                 for (int c = b; c <= max; c++) {
                     for (int d = c; d <= max; d++) {
-                        boolean[] check = new boolean[15];
+                        int[] gen = new int[] { a, b, c, d, a + b, b + c, c + d, d + a, a + c, b + d, a + b + c,
+                                a + b + d, a + c + d, b + c + d, a + b + c + d };
 
-                        if (input[0] == a)
-                            check[0] = true;
-                        if (input[1] == b)
-                            check[1] = true;
-                        if (input[2] == c)
-                            check[2] = true;
-                        if (input[3] == d)
-                            check[3] = true;
-
-                        for (int i = 4; i < 15; i++) {
-                            if (input[i] == a + b)
-                                check[i] = true;
-                            else if (input[i] == b + c)
-                                check[i] = true;
-                            else if (input[i] == c + d)
-                                check[i] = true;
-                            else if (input[i] == d + a)
-                                check[i] = true;
-                            else if (input[i] == a + c)
-                                check[i] = true;
-                            else if (input[i] == b + d)
-                                check[i] = true;
-                            else if (input[i] == a + b + c)
-                                check[i] = true;
-                            else if (input[i] == a + b + d)
-                                check[i] = true;
-                            else if (input[i] == a + c + d)
-                                check[i] = true;
-                            else if (input[i] == b + c + d)
-                                check[i] = true;
-                            else if (input[i] == a + b + c + d)
-                                check[i] = true;
-                            else
-                                check[i] = false;
-                        }
+                        Arrays.sort(gen);
 
                         boolean isAllTrue = true;
                         for (int i = 0; i < 15; i++) {
-                            if (!check[i])
+                            if (input[i] != gen[i])
                                 isAllTrue = false;
                         }
 
@@ -85,7 +49,6 @@ public class Main_6 {
                             return;
                         }
                     }
-
                 }
             }
         }

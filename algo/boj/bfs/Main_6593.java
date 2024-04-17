@@ -108,7 +108,7 @@ public class Main_6593 {
             }
 
             simulation();
-        } // end of while
+        } // end of while;
 
         System.out.println(sb.toString());
 

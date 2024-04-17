@@ -3,6 +3,10 @@ package Intermediate_mid.intermediate_data_structure.TreeSet;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 가까운 숫자
+ */
+
 public class Main_6 {
 
     static final int MAX = (int) 1e9 + 1;

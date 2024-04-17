@@ -75,7 +75,9 @@ public class Main_4 {
     public static void func(int line_cnt, int depth, int start) {
         if (depth == line_cnt) {
             // countOverlappingLine(line_cnt);
-
+            for (int i : record)
+                System.out.print(i + " ");
+            System.out.println();
             if (possible(line_cnt))
                 ans = Math.max(ans, line_cnt);
             return;
@@ -95,8 +97,7 @@ public class Main_4 {
 
     public static void sol() {
         // i : 뽑은 막대 갯수
-        for (int i = 1; i <= n; i++)
-            func(i, 0, 1); // 시간 초과 부분
+        func(n, 0, 1); // 시간 초과 부분
     }// end of sol
 
     public static void init() throws IOException {
