@@ -11,33 +11,28 @@ public class Main_45 {
 }
 
 class Solution {
+
+    private static int answer;
+    private static int[][] Dungeons;
+    private static boolean[] visited;
+
     public int solution(int k, int[][] dungeons) {
-        int answer = -1;
-        answer = Math.max(answer, func(k, dungeons, new boolean[dungeons.length], 0, 0)); // 돌은 던전의 갯수
+        answer = -1;
+        Dungeons = dungeons;
+        visited = new boolean[dungeons.length];
+
+        backtrack(k, 0);
         return answer;
     }
 
-    public int func(int k, int[][] dungeons, boolean[] visited, int pos, int cnt) {
-        if (k <= 0)
-            return cnt; // 기저 조건
-        if (pos == dungeons.length)
-            return cnt; // 기저 조건
-
-        for (int i = 0; i < dungeons.length; i++) {
-            if (visited[i])
-                continue;
-            if (k < dungeons[i][0])
+    private static void backtrack(int k, int cnt) {
+        for (int i = 0; i < Dungeons.length; i++) {
+            if (visited[i] || k < Dungeons[i][0])
                 continue;
             visited[i] = true;
-            k -= dungeons[i][1];
-            cnt++;
-
-            func(k, dungeons, visited, pos + 1, cnt);
+            backtrack(k - Dungeons[i][1], cnt + 1);
+            answer = Math.max(answer, cnt + 1);
             visited[i] = false;
-            k += dungeons[i][1];
-            cnt--;
         }
-
-        return cnt;
-    }// end of func
+    }// end of backtrack
 }
